@@ -1725,14 +1725,12 @@ section{position:relative;z-index:1;}
   // Slower auto-spin control
   const autoSpinSpeed = 0.001; // Slower orbital rotation
   let isDragging = false;
-  let needsReset = false;
   let lastInteractionTime = 0;
   let previousMousePosition = { x: 0, y: 0 };
 
   // Mouse / Touch Event Listeners for interactive rotation
   function onStart(e) {
     isDragging = true;
-    needsReset = true;
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     previousMousePosition = { x: clientX, y: clientY };
@@ -1789,22 +1787,12 @@ section{position:relative;z-index:1;}
     if (!isDragging) {
       const timeSinceDrag = Date.now() - lastInteractionTime;
       if (timeSinceDrag > 1500) {
-        if (needsReset) {
-          // Lerp back to level X-rotation (0) and front-facing Y-rotation
-          const targetY = Math.round(sphere.rotation.y / (Math.PI * 2)) * (Math.PI * 2);
-          sphere.rotation.x += (0 - sphere.rotation.x) * 0.05;
-          sphere.rotation.y += (targetY - sphere.rotation.y) * 0.05;
-
-          // If close enough to target, finish reset
-          if (Math.abs(sphere.rotation.x) < 0.01 && Math.abs(sphere.rotation.y - targetY) < 0.01) {
-            sphere.rotation.x = 0;
-            sphere.rotation.y = 0; // Reset to 0 base for clean spin
-            needsReset = false;
-          }
-        } else {
-          // Normal auto-spin
-          sphere.rotation.y += autoSpinSpeed;
-        }
+        // Slowly ease vertical tilt (X-rotation) back to level (0)
+        sphere.rotation.x += (0 - sphere.rotation.x) * 0.015;
+        
+        // Resume forward auto-spinning Y-rotation, easing speed up over 2 seconds
+        const easeFactor = Math.min(1, (timeSinceDrag - 1500) / 2000);
+        sphere.rotation.y += autoSpinSpeed * easeFactor;
       }
     }
 
