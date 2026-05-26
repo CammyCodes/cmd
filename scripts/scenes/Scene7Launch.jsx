@@ -37,7 +37,7 @@ function Scene7Launch() {
 
         <Reveal delay={1}>
           <div className="launch-buttons">
-            <a className="btn btn-large" href="https://wa.me/4400000000000" target="_blank" rel="noreferrer">
+            <a className="btn btn-large" href="https://wa.me/447404922567" target="_blank" rel="noreferrer">
               {'> WhatsApp'}
             </a>
             <a className="btn btn-large" href="mailto:hello@camm.design">
@@ -49,7 +49,7 @@ function Scene7Launch() {
         <Reveal delay={2}>
           <div className="launch-meta">
             <span>{'> hello@camm.design'}</span>
-            <span>{'> WhatsApp: +44 0000 000 000'}</span>
+            <span>{'> WhatsApp: +44 7404 922 567'}</span>
             <span>{'> London, UK'}</span>
           </div>
         </Reveal>
