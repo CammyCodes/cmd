@@ -47,4 +47,4 @@ To run the site locally:
    # Using node (http-server)
    npx http-server .
    ```
-3. Open `http://localhost:8000/CMD v2.html` in your web browser.
+3. Open `http://localhost:8000/` (or `http://localhost:8000/index.html`) in your web browser.
