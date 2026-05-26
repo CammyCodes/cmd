@@ -1,0 +1,1303 @@
+/* CMD — design tokens & base */
+
+:root {
+  /* Colour — §6 brand */
+  --ink-100: #000000;
+  --ink-90:  #0A0A0A;
+  --ink-80:  #141414;
+  --ink-60:  #2A2A2A;
+  --ink-40:  #666666;
+  --ink-20:  #A8A8A8;
+  --paper-100: #FFFFFF;
+  --paper-90:  #F2F2F2;
+  --paper-60:  #D4D4D4;
+
+  /* Galaxy accent — v1.1 brand override.
+     Used sparingly: section markers, key phrases, portal galaxy, planet halos.
+     NEVER for body text, NEVER as full background. */
+  --violet-100: #C8A8FF;  /* lilac highlight */
+  --violet-80:  #9B7BFF;  /* primary purple */
+  --violet-60:  #6A48E0;  /* deep galaxy */
+  --violet-40:  #3F2A8F;  /* nebula shadow */
+  --violet-20:  #1A0F3D;  /* near-black violet */
+
+  /* Type scale — §7 brand */
+  --type-display-xl: clamp(56px, 9vw, 160px);
+  --type-display-l:  clamp(40px, 5.5vw, 96px);
+  --type-display-m:  clamp(28px, 3.5vw, 56px);
+  --type-h1: 32px;
+  --type-h2: 24px;
+  --type-h3: 18px;
+  --type-body: 16px;
+  --type-small: 14px;
+  --type-mono: 13px;
+  --type-signature: 12px;
+
+  /* Motion */
+  --ease-cmd: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-hover: 200ms;
+  --t-default: 400ms;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink-100);
+  color: var(--paper-100);
+  font-family: "Geist", "Geist Sans", system-ui, sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ——————————————————————————————————————————————
+   Type
+   —————————————————————————————————————————————— */
+
+.fraunces {
+  font-family: "Fraunces", "Times New Roman", serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  letter-spacing: -0.02em;
+}
+
+.fraunces-italic {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 12;
+}
+
+.mono {
+  font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-weight: 400;
+  font-size: var(--type-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.display-xl {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144;
+  font-size: var(--type-display-xl);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+.display-l {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 96;
+  font-size: var(--type-display-l);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+
+.display-m {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-variation-settings: "opsz" 48;
+  font-size: var(--type-display-m);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+h1, h2, h3 { margin: 0; font-weight: 500; }
+
+/* ——————————————————————————————————————————————
+   Layout primitives
+   —————————————————————————————————————————————— */
+
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+}
+
+.scene {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 32px;
+}
+
+.scene-inner {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.scene-narrow {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ——————————————————————————————————————————————
+   Nav
+   —————————————————————————————————————————————— */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+.nav > * { pointer-events: auto; }
+
+.wordmark {
+  font-family: "Fraunces", serif;
+  font-size: 20px;
+  font-style: italic;
+  font-variation-settings: "opsz" 24;
+  letter-spacing: -0.02em;
+  color: var(--paper-100);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.wordmark .cursor {
+  display: inline-block;
+  width: 9px;
+  height: 14px;
+  background: var(--paper-100);
+  animation: blink 1.2s steps(2) infinite;
+  transform: translateY(1px);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-link {
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--paper-100);
+  text-decoration: none;
+  position: relative;
+  padding: 4px 0;
+  text-transform: uppercase;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background: currentColor;
+  transition: width var(--t-hover) var(--ease-cmd);
+}
+.nav-link:hover::after { width: 100%; }
+
+.nav-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--paper-100);
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.96);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px;
+  gap: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms var(--ease-cmd);
+}
+.menu-overlay.open { opacity: 1; pointer-events: auto; }
+.menu-overlay a {
+  font-family: "Fraunces", serif;
+  font-size: 48px;
+  color: var(--paper-100);
+  text-decoration: none;
+  font-variation-settings: "opsz" 48;
+}
+.menu-overlay .close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+}
+
+/* ——————————————————————————————————————————————
+   Mono label
+   —————————————————————————————————————————————— */
+
+.mono-label {
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.mono-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet-80);
+  box-shadow: 0 0 10px var(--violet-80);
+  display: inline-block;
+}
+
+.accent-violet { color: var(--violet-100); }
+.accent-violet-soft { color: var(--violet-80); }
+
+/* ——————————————————————————————————————————————
+   Placeholder slot (for Gemini Nano-Banana)
+   —————————————————————————————————————————————— */
+
+.placeholder {
+  position: relative;
+  background: var(--ink-90);
+  border: 1px dashed var(--ink-60);
+  color: var(--paper-100);
+  padding: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 14px,
+      rgba(255,255,255,0.02) 14px 15px
+    );
+  pointer-events: none;
+}
+
+.placeholder-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--paper-100);
+  text-transform: uppercase;
+  align-self: flex-start;
+  padding: 4px 8px;
+  border: 1px solid var(--paper-100);
+}
+
+.placeholder-title {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+}
+
+.placeholder-prompt {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--paper-100);
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+.placeholder-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+  border-top: 1px solid var(--ink-60);
+  padding-top: 10px;
+}
+
+.placeholder-motion {
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+  border-top: 1px dashed var(--ink-60);
+  padding-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+.placeholder-motion span:first-child { color: var(--paper-100); }
+
+/* ——————————————————————————————————————————————
+   Buttons
+   —————————————————————————————————————————————— */
+
+.btn {
+  font-family: "Geist Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-100);
+  background: var(--ink-100);
+  border: 1px solid var(--paper-100);
+  padding: 22px 36px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 64px;
+  cursor: pointer;
+  transition: background var(--t-hover) var(--ease-cmd), color var(--t-hover) var(--ease-cmd);
+}
+.btn:hover {
+  background: var(--paper-100);
+  color: var(--ink-100);
+}
+
+.btn-large {
+  font-size: 14px;
+  min-width: 260px;
+}
+
+/* ——————————————————————————————————————————————
+   Reveal-on-scroll utility
+   —————————————————————————————————————————————— */
+
+/* Default visible state — Reveal component applies an entry animation via Web Animations API.
+   This guarantees content stays readable even if CSS transitions are paused (sandboxed iframes etc).
+*/
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ——————————————————————————————————————————————
+   Scene 1 — Departure
+   —————————————————————————————————————————————— */
+
+.s1 .hero-headline {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 16ch;
+}
+.s1 .hero-meta {
+  margin-top: 48px;
+  text-align: center;
+  color: var(--ink-20);
+}
+.s1 .scroll-prompt {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-20);
+}
+.s1 .scroll-prompt .chev {
+  display: inline-block;
+  animation: bob 1.6s var(--ease-cmd) infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ——————————————————————————————————————————————
+   Scene 2 — Crossing (typographic composition)
+   —————————————————————————————————————————————— */
+
+.s2 .s2-comp {
+  display: grid;
+  gap: 32px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.s2 .s2-line {
+  font-family: "Fraunces", serif;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+  margin: 0;
+}
+.s2 .s2-line-1 {
+  font-size: clamp(20px, 2.4vw, 28px);
+  color: var(--ink-20);
+  font-family: "Geist Mono", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+}
+.s2 .s2-line-2 {
+  font-size: clamp(40px, 6vw, 88px);
+  margin-left: -2px;
+}
+.s2 .s2-line-2 em {
+  font-style: italic;
+  color: var(--violet-100);
+  font-weight: 300;
+}
+.s2 .s2-line-3 {
+  font-size: clamp(18px, 1.6vw, 22px);
+  color: var(--ink-20);
+  font-family: "Geist Sans", system-ui, sans-serif;
+  line-height: 1.55;
+  letter-spacing: 0;
+  font-variation-settings: normal;
+  max-width: 52ch;
+  margin-top: 24px;
+}
+.s2 .s2-line-4 {
+  font-size: clamp(28px, 3.5vw, 48px);
+  margin-top: 32px;
+}
+.s2 .s2-line-4 em {
+  font-style: italic;
+  color: var(--violet-100);
+}
+.s2 .s2-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--violet-80), transparent);
+  margin: 8px 0;
+}
+
+/* ——————————————————————————————————————————————
+   Scene 3 — Encountering (pinned planet scroll)
+   —————————————————————————————————————————————— */
+
+.s3 {
+  /* Tall enough for genuine horizontal travel — 3 large planets, wide gaps */
+  height: 500vh;
+  padding: 0;
+  display: block;
+  align-items: stretch;
+}
+.s3-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.s3-header {
+  padding: 88px 32px 0 32px;
+}
+.s3-track {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 400px;
+  padding-left: calc(50vw - 140px);  /* planet 0 starts dead-centre */
+  will-change: transform;
+}
+.s3-track-end {
+  flex-shrink: 0;
+  width: calc(50vw - 140px);          /* mirror, so planet N-1 ends dead-centre */
+  height: 1px;
+}
+.planet {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px solid var(--paper-100);
+  background: radial-gradient(circle at 35% 35%, var(--ink-80), var(--ink-100) 70%);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 600ms var(--ease-cmd), opacity 400ms var(--ease-cmd), border-color 400ms var(--ease-cmd);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1);
+}
+.planet::before {
+  /* outer violet halo — galaxy hint, intensifies on active */
+  content: "";
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(155,123,255,0.18) 0%, rgba(155,123,255,0.04) 40%, transparent 70%);
+  opacity: 0;
+  transition: opacity 600ms var(--ease-cmd);
+  pointer-events: none;
+  z-index: -1;
+}
+.planet.active {
+  transform: scale(1.4);
+  border-color: var(--violet-100);
+}
+.planet.active::before { opacity: 1; }
+
+.planet-orb {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%, #1f1f1f 0%, #0a0a0a 55%, #000 100%);
+  animation: spin 80s linear infinite;
+  overflow: hidden;
+}
+.planet-orb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 65% 50%, rgba(200,168,255,0.06) 0%, transparent 35%),
+    radial-gradient(ellipse at 25% 70%, rgba(255,255,255,0.04) 0%, transparent 30%);
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.planet-label {
+  position: absolute;
+  bottom: -84px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: opacity var(--t-default) var(--ease-cmd);
+}
+.planet.active .planet-label { opacity: 1; }
+
+.planet .enter-affordance {
+  position: absolute;
+  bottom: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--violet-100);
+  opacity: 0;
+  transition: opacity var(--t-default) var(--ease-cmd);
+  text-transform: uppercase;
+}
+.planet.active .enter-affordance { opacity: 1; }
+
+.s3-track.has-active .planet:not(.active) {
+  opacity: 0.4;
+}
+
+.s3-progress {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+}
+.s3-progress-bar {
+  flex: 1;
+  height: 1px;
+  margin: 0 24px;
+  background: var(--ink-60);
+  position: relative;
+}
+.s3-progress-bar > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, var(--violet-80), var(--paper-100));
+  transition: width 80ms linear;
+}
+
+@media (max-width: 720px) {
+  .s3 { height: auto; }
+  .s3-pin {
+    position: relative;
+    height: auto;
+    padding: 64px 0;
+  }
+  .s3-track {
+    flex-direction: column;
+    gap: 180px;
+    padding: 64px 32px;
+  }
+  .s3-track-end { display: none; }
+  .planet { width: 220px; height: 220px; transform: none !important; opacity: 1 !important; }
+  .s3-progress { display: none; }
+}
+
+/* ——————————————————————————————————————————————
+   Scene 4 — Re-entry (flight plan)
+   —————————————————————————————————————————————— */
+
+.s4-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 64px;
+}
+.s4-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 32px;
+  border-top: 1px solid var(--paper-100);
+}
+.s4-panel .t-minus {
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--paper-100);
+  text-transform: uppercase;
+}
+.s4-panel h3 {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-size: 40px;
+  font-variation-settings: "opsz" 48;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+.s4-panel p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-20);
+  margin: 0;
+  max-width: 32ch;
+}
+
+@media (max-width: 900px) {
+  .s4-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+
+/* ——————————————————————————————————————————————
+   Scene 5 — Manifest (horizontal pricing cards)
+   —————————————————————————————————————————————— */
+
+.s5-grid {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+.s5-card {
+  position: relative;
+  background: var(--ink-90);
+  border: 1px solid var(--ink-60);
+  padding: 28px 22px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 380px;
+  overflow: hidden;
+  transition: border-color var(--t-default) var(--ease-cmd), transform var(--t-default) var(--ease-cmd), background var(--t-default) var(--ease-cmd);
+}
+.s5-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-accent, var(--paper-100));
+  background: var(--ink-80);
+}
+.s5-card::before {
+  /* top accent bar — each tier gets its own galaxy-tinted hue */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--paper-100));
+}
+.s5-card::after {
+  /* faint galaxy glow tint in the card body, color-shifted per tier */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 110%, var(--card-accent, transparent) 0%, transparent 60%);
+  opacity: 0.08;
+  pointer-events: none;
+}
+.s5-card-num {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--card-accent, var(--ink-40));
+  text-transform: uppercase;
+}
+.s5-card-name {
+  font-family: "Fraunces", serif;
+  font-size: 26px;
+  font-variation-settings: "opsz" 48;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+.s5-card-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-20);
+  flex-grow: 1;
+}
+.s5-card-includes {
+  border-top: 1px solid var(--ink-60);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+}
+.s5-card-includes li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.s5-card-includes li::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--card-accent, var(--ink-40));
+  flex-shrink: 0;
+}
+.s5-card-price {
+  font-family: "Fraunces", serif;
+  font-size: 22px;
+  font-variation-settings: "opsz" 48;
+  letter-spacing: -0.015em;
+  padding-top: 12px;
+  border-top: 1px solid var(--ink-60);
+}
+.s5-card-price small {
+  display: block;
+  font-family: "Geist Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.s5-footnote {
+  margin-top: 40px;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .s5-grid { grid-template-columns: repeat(3, 1fr); }
+  .s5-card:nth-child(4), .s5-card:nth-child(5) { grid-column: span 1; }
+}
+@media (max-width: 720px) {
+  .s5-grid { grid-template-columns: 1fr; }
+  .s5-card { min-height: auto; }
+}
+
+/* ——————————————————————————————————————————————
+   Scene 6 — Crew
+   —————————————————————————————————————————————— */
+
+.s6 p {
+  margin: 0;
+  max-width: 36ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ——————————————————————————————————————————————
+   Scene 7 — Launch sequence
+   —————————————————————————————————————————————— */
+
+.s7 .launch-headline {
+  text-align: center;
+  margin: 0 auto 64px auto;
+  max-width: 14ch;
+}
+.s7 .launch-buttons {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.s7 .launch-meta {
+  margin-top: 64px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+}
+
+/* ——————————————————————————————————————————————
+   Scene 8 — Orbit (footer)
+   —————————————————————————————————————————————— */
+
+.s8 {
+  min-height: auto;
+  padding-top: 96px;
+  padding-bottom: 64px;
+  align-items: flex-start;
+}
+.s8 .footer-inner {
+  border-top: 1px solid var(--ink-60);
+  padding-top: 64px;
+}
+.s8-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 96px;
+}
+.s8-grid h4 {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-40);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.s8-grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.s8-grid a {
+  color: var(--paper-100);
+  text-decoration: none;
+  font-size: 15px;
+}
+.s8-grid a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+.s8 .footer-tagline {
+  font-style: italic;
+  font-family: "Fraunces", serif;
+  font-weight: 300;
+  font-variation-settings: "opsz" 48;
+  font-size: 28px;
+  line-height: 1.2;
+  margin-top: 16px;
+  max-width: 18ch;
+  color: var(--paper-100);
+}
+
+.s8 .footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+}
+
+.signature {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 12;
+  font-size: var(--type-signature);
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.signature:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+.s8 .footer-meta {
+  margin-top: 32px;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .s8-grid { grid-template-columns: 1fr; gap: 56px; }
+  .s8 .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* ——————————————————————————————————————————————
+   Warp transition overlay
+   —————————————————————————————————————————————— */
+
+.warp {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.warp-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--paper-100);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 24px rgba(255,255,255,0.4);
+}
+.warp-flash {
+  position: absolute;
+  inset: 0;
+  background: var(--paper-100);
+  opacity: 0;
+}
+
+/* ——————————————————————————————————————————————
+   Broken portal (case study view)
+   —————————————————————————————————————————————— */
+
+.portal-page {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  overflow-y: auto;
+  background: var(--ink-100);
+}
+.portal-page-inner {
+  min-height: 100vh;
+  padding: 96px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+}
+.portal-header {
+  text-align: center;
+  max-width: 800px;
+}
+.portal-dateline {
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.portal-title {
+  font-family: "Fraunces", serif;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.95;
+  margin-bottom: 32px;
+  font-variation-settings: "opsz" 96;
+  letter-spacing: -0.02em;
+}
+.portal-problem {
+  font-family: "Fraunces", serif;
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.2;
+  color: var(--ink-20);
+  font-variation-settings: "opsz" 48;
+  letter-spacing: -0.01em;
+  max-width: 28ch;
+  margin: 0 auto;
+}
+
+/* The crack itself — a jagged window into another site, with galaxy moving around it */
+.broken-portal {
+  position: relative;
+  width: min(90vw, 1100px);
+  height: min(64vh, 620px);
+  filter: drop-shadow(0 0 60px rgba(155,123,255,0.18));
+}
+/* Galaxy backdrop — sits BEHIND the crack, full bleed in the portal area */
+.broken-portal-galaxy {
+  position: absolute;
+  inset: -120px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden;
+}
+.broken-portal-galaxy::before,
+.broken-portal-galaxy::after {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  border-radius: 50%;
+}
+.broken-portal-galaxy::before {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(155,123,255,0.18) 60deg,
+    rgba(106,72,224,0.32) 110deg,
+    rgba(63,42,143,0.22) 180deg,
+    transparent 240deg,
+    rgba(200,168,255,0.14) 300deg,
+    transparent 360deg
+  );
+  animation: galaxySpin 24s linear infinite;
+  filter: blur(40px);
+}
+.broken-portal-galaxy::after {
+  background: radial-gradient(
+    ellipse at 40% 60%, rgba(155,123,255,0.20) 0%, transparent 50%
+  ),
+  radial-gradient(
+    ellipse at 70% 30%, rgba(200,168,255,0.14) 0%, transparent 45%
+  ),
+  radial-gradient(
+    ellipse at 20% 20%, rgba(63,42,143,0.30) 0%, transparent 40%
+  );
+  animation: galaxySpinReverse 36s linear infinite;
+  filter: blur(30px);
+  mix-blend-mode: screen;
+}
+@keyframes galaxySpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes galaxySpinReverse {
+  to { transform: rotate(-360deg); }
+}
+
+/* Drifting starlets inside the galaxy ring */
+.broken-portal-particles {
+  position: absolute;
+  inset: -80px;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.broken-portal-particles span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--paper-100);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--violet-100);
+  animation: particleDrift 8s ease-in-out infinite;
+}
+
+@keyframes particleDrift {
+  0%, 100% { opacity: 0; transform: translate(0,0) scale(0.6); }
+  20%, 80% { opacity: 1; }
+  50% { transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(1.2); }
+}
+
+.broken-portal-shell {
+  position: absolute;
+  inset: 0;
+  /* irregular zig-zag crack — jagged polygon clip */
+  clip-path: polygon(
+    8%   2%,  14%  7%,   9%  14%,  22%  18%,
+    18%  28%,  3%   32%,  11%  44%,  6%   56%,
+    16%  62%,  10%  72%,  21%  78%,  14%  92%,
+    28%  96%,  40%  88%,  55%  94%,  70%  86%,
+    82%  96%,  92%  82%,  84%  72%,  98%  60%,
+    88%  48%,  96%  34%,  82%  28%,  92%  16%,
+    74%  12%,  64%  4%,   54%  10%,  44%  3%,
+    34%  9%,   24%  2%
+  );
+  background: var(--ink-100);
+  overflow: hidden;
+}
+.broken-portal-inner {
+  position: absolute;
+  inset: 0;
+  background: var(--ink-90);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* the bright crack edge — sits just behind the shell, slightly larger */
+.broken-portal-edge {
+  position: absolute;
+  inset: -3px;
+  clip-path: inherit;
+  background: linear-gradient(135deg, var(--violet-100), var(--paper-100), var(--violet-80));
+  background-size: 200% 200%;
+  z-index: -1;
+  opacity: 0.9;
+  animation: portalEdgeShift 6s ease-in-out infinite;
+}
+@keyframes portalEdgeShift {
+  0%, 100% { background-position: 0% 0%; opacity: 0.8; }
+  50% { background-position: 100% 100%; opacity: 1; }
+}
+.broken-portal-inner .placeholder {
+  border: none;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  padding: clamp(24px, 4vw, 48px);
+}
+
+.portal-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  justify-content: center;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-40);
+  text-transform: uppercase;
+}
+
+.portal-sections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  max-width: 1100px;
+  width: 100%;
+}
+.portal-section h4 {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-20);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.portal-section p {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+  color: var(--paper-90);
+}
+@media (max-width: 900px) {
+  .portal-sections { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.portal-close {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  z-index: 160;
+  background: transparent;
+  border: 1px solid var(--paper-100);
+  color: var(--paper-100);
+  padding: 12px 18px;
+  cursor: pointer;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: all var(--t-hover) var(--ease-cmd);
+}
+.portal-close:hover {
+  background: var(--paper-100);
+  color: var(--ink-100);
+}
+
+/* portal entrance */
+.portal-page.entering {
+  animation: portalIn 700ms var(--ease-cmd);
+}
+@keyframes portalIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ——————————————————————————————————————————————
+   Misc
+   —————————————————————————————————————————————— */
+
+::selection { background: var(--paper-100); color: var(--ink-100); }
+
+a { color: inherit; }
+
+button { font-family: inherit; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--paper-100);
+  color: var(--ink-100);
+  padding: 12px 16px;
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  z-index: 999;
+}
+.skip:focus { left: 16px; top: 16px; }
+
+:focus-visible {
+  outline: 2px solid var(--paper-100);
+  outline-offset: 4px;
+}

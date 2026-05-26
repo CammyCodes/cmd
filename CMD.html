@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cmd — Camm Design</title>
+  <meta name="description" content="Most websites are dead rocks. We build worlds. cmd — Camm Design, London." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#000000">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#000000"/>
+      <!-- scattered stars -->
+      <g fill="#ffffff">
+        <circle cx="120" cy="160" r="2"/>
+        <circle cx="240" cy="540" r="1.5"/>
+        <circle cx="380" cy="100" r="2.5"/>
+        <circle cx="500" cy="680" r="1.5"/>
+        <circle cx="700" cy="220" r="2"/>
+        <circle cx="880" cy="540" r="1.5"/>
+        <circle cx="1040" cy="160" r="2.5"/>
+        <circle cx="1100" cy="640" r="2"/>
+        <circle cx="980" cy="720" r="1.5"/>
+        <circle cx="200" cy="700" r="1.5"/>
+      </g>
+      <!-- violet star -->
+      <circle cx="900" cy="120" r="3" fill="#C8A8FF"/>
+      <!-- cursor + CMD wordmark -->
+      <g transform="translate(540, 360)">
+        <rect x="0" y="0" width="22" height="36" fill="#ffffff"/>
+        <text x="46" y="28" font-family="Geist Mono, ui-monospace, monospace" font-size="34" fill="#ffffff" letter-spacing="6">cmd</text>
+      </g>
+      <!-- subtle horizon line -->
+      <line x1="380" y1="430" x2="820" y2="430" stroke="#9B7BFF" stroke-width="1" opacity="0.4"/>
+    </svg>
+  </template>
+
+  <a href="#main" class="skip">Skip to content</a>
+  <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+  <div id="root"></div>
+
+  <!-- Starfield runs on plain canvas 2D, no React -->
+  <script src="scripts/starfield.js"></script>
+
+  <!-- Components (order matters: leaves first, then composition) -->
+  <script type="text/babel" data-presets="env,react" src="scripts/components/Placeholder.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/MonoLabel.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/Nav.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/SignatureMark.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/Reveal.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/WarpTransition.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/BrokenPortal.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/components/AssetManifest.jsx"></script>
+
+  <!-- Scenes -->
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene1Departure.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene2Crossing.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene3Encountering.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene4ReEntry.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene5Manifest.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene6Crew.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene7Launch.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="scripts/scenes/Scene8Orbit.jsx"></script>
+
+  <!-- Root app -->
+  <script type="text/babel" data-presets="env,react" src="scripts/app.jsx"></script>
+</body>
+</html>
