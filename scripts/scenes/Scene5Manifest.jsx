@@ -12,7 +12,7 @@ function Scene5Manifest() {
       name: 'Landing page',
       desc: 'One page that does the job. Phone-ready in two weeks.',
       includes: ['Copy', 'Design', 'Build', 'Host'],
-      price: '£500',
+      price: '£800+',
       cadence: 'From',
       accent: '#C8A8FF'   // lilac
     },
@@ -21,8 +21,8 @@ function Scene5Manifest() {
       name: 'Brochure',
       desc: '5–10 pages with contact form and gallery.',
       includes: ['CMS', 'Forms', 'Gallery', 'SEO'],
-      price: '£1,200',
-      cadence: 'From',
+      price: '2–3 weeks',
+      cadence: '',
       accent: '#B79CFF'
     },
     {
@@ -30,8 +30,8 @@ function Scene5Manifest() {
       name: 'Bookings',
       desc: 'Brochure plus a way for customers to book in.',
       includes: ['Calendar', 'Payments', 'Reminders'],
-      price: '£1,500',
-      cadence: 'From',
+      price: '3 weeks',
+      cadence: '',
       accent: '#9B7BFF'   // primary
     },
     {
@@ -39,8 +39,8 @@ function Scene5Manifest() {
       name: 'Online shop',
       desc: 'Up to 50 products, secure Stripe checkout.',
       includes: ['Stripe', 'Stock', 'Email', 'SSL'],
-      price: '£2,500',
-      cadence: 'From',
+      price: '4 weeks',
+      cadence: '',
       accent: '#7E5FE0'
     },
     {
@@ -48,7 +48,7 @@ function Scene5Manifest() {
       name: 'Custom build',
       desc: 'Anything bigger. Portals, calculators, integrations.',
       includes: ['Scoped per project'],
-      price: 'Contact',
+      price: 'POA',
       cadence: 'Quote',
       accent: '#6A48E0'   // deep galaxy
     }

@@ -21,6 +21,12 @@
   --violet-40:  #3F2A8F;  /* nebula shadow */
   --violet-20:  #1A0F3D;  /* near-black violet */
 
+  /* RGB channels for opacity gradients */
+  --violet-100-rgb: 200, 168, 255;
+  --violet-80-rgb:  155, 123, 255;
+  --violet-60-rgb:  106, 72, 224;
+  --violet-40-rgb:  63, 42, 143;
+
   /* Type scale — §7 brand */
   --type-display-xl: clamp(56px, 9vw, 160px);
   --type-display-l:  clamp(40px, 5.5vw, 96px);
@@ -38,6 +44,27 @@
   --t-hover: 200ms;
   --t-default: 400ms;
 }
+
+/* Tritanopia colorblind overrides */
+html.tritanopia-mode, body.tritanopia-mode {
+  --violet-100: #80f7ff;      /* Soft Cyan */
+  --violet-80:  #00e5ff;      /* Vibrant Cyan */
+  --violet-60:  #00838f;      /* Deep Teal */
+  --violet-40:  #004d40;      /* Darker Teal */
+  --violet-20:  #002f35;      /* Near-black Teal */
+
+  --violet-100-rgb: 128, 247, 255;
+  --violet-80-rgb:  0, 229, 255;
+  --violet-60-rgb:  0, 131, 143;
+  --violet-40-rgb:  0, 77, 64;
+}
+
+/* Colorblind card accent overrides (force over inline React styles) */
+body.tritanopia-mode .s5-card:nth-child(1) { --card-accent: #80f7ff !important; }
+body.tritanopia-mode .s5-card:nth-child(2) { --card-accent: #40e9ff !important; }
+body.tritanopia-mode .s5-card:nth-child(3) { --card-accent: #00e5ff !important; }
+body.tritanopia-mode .s5-card:nth-child(4) { --card-accent: #00b8d4 !important; }
+body.tritanopia-mode .s5-card:nth-child(5) { --card-accent: #00838f !important; }
 
 * { box-sizing: border-box; }
 
@@ -581,7 +608,7 @@ h1, h2, h3 { margin: 0; font-weight: 500; }
   position: absolute;
   inset: -40px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(155,123,255,0.18) 0%, rgba(155,123,255,0.04) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--violet-80-rgb),0.18) 0%, rgba(var(--violet-80-rgb),0.04) 40%, transparent 70%);
   opacity: 0;
   transition: opacity 600ms var(--ease-cmd);
   pointer-events: none;
@@ -606,7 +633,7 @@ h1, h2, h3 { margin: 0; font-weight: 500; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 65% 50%, rgba(200,168,255,0.06) 0%, transparent 35%),
+    radial-gradient(ellipse at 65% 50%, rgba(var(--violet-100-rgb),0.06) 0%, transparent 35%),
     radial-gradient(ellipse at 25% 70%, rgba(255,255,255,0.04) 0%, transparent 30%);
 }
 @keyframes spin {
@@ -1078,7 +1105,7 @@ h1, h2, h3 { margin: 0; font-weight: 500; }
   position: relative;
   width: min(90vw, 1100px);
   height: min(64vh, 620px);
-  filter: drop-shadow(0 0 60px rgba(155,123,255,0.18));
+  filter: drop-shadow(0 0 60px rgba(var(--violet-80-rgb),0.18));
 }
 /* Galaxy backdrop — sits BEHIND the crack, full bleed in the portal area */
 .broken-portal-galaxy {
@@ -1100,11 +1127,11 @@ h1, h2, h3 { margin: 0; font-weight: 500; }
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    rgba(155,123,255,0.18) 60deg,
-    rgba(106,72,224,0.32) 110deg,
-    rgba(63,42,143,0.22) 180deg,
+    rgba(var(--violet-80-rgb),0.18) 60deg,
+    rgba(var(--violet-60-rgb),0.32) 110deg,
+    rgba(var(--violet-40-rgb),0.22) 180deg,
     transparent 240deg,
-    rgba(200,168,255,0.14) 300deg,
+    rgba(var(--violet-100-rgb),0.14) 300deg,
     transparent 360deg
   );
   animation: galaxySpin 24s linear infinite;
@@ -1112,13 +1139,13 @@ h1, h2, h3 { margin: 0; font-weight: 500; }
 }
 .broken-portal-galaxy::after {
   background: radial-gradient(
-    ellipse at 40% 60%, rgba(155,123,255,0.20) 0%, transparent 50%
+    ellipse at 40% 60%, rgba(var(--violet-80-rgb),0.20) 0%, transparent 50%
   ),
   radial-gradient(
-    ellipse at 70% 30%, rgba(200,168,255,0.14) 0%, transparent 45%
+    ellipse at 70% 30%, rgba(var(--violet-100-rgb),0.14) 0%, transparent 45%
   ),
   radial-gradient(
-    ellipse at 20% 20%, rgba(63,42,143,0.30) 0%, transparent 40%
+    ellipse at 20% 20%, rgba(var(--violet-40-rgb),0.30) 0%, transparent 40%
   );
   animation: galaxySpinReverse 36s linear infinite;
   filter: blur(30px);

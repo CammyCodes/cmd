@@ -29,10 +29,14 @@
     const tint = opts.tint || 'rgba(255,255,255,';
     const violetTint = opts.violet || false;
 
+    const isTritanopia = document.body.classList.contains('tritanopia-mode') || document.documentElement.classList.contains('tritanopia-mode');
+    const colorViolet1 = isTritanopia ? 'rgba(128,247,255,' : 'rgba(200,168,255,';
+    const colorViolet2 = isTritanopia ? 'rgba(0,229,255,' : 'rgba(155,123,255,';
+
     // Soft outer halo (radial gradient)
     const halo = c.createRadialGradient(cx, cy, 0, cx, cy, size / 2);
-    halo.addColorStop(0, (violetTint ? 'rgba(200,168,255,' : tint) + (opts.haloAlpha || 0.35) + ')');
-    halo.addColorStop(0.25, (violetTint ? 'rgba(155,123,255,' : tint) + ((opts.haloAlpha || 0.35) * 0.4) + ')');
+    halo.addColorStop(0, (violetTint ? colorViolet1 : tint) + (opts.haloAlpha || 0.35) + ')');
+    halo.addColorStop(0.25, (violetTint ? colorViolet2 : tint) + ((opts.haloAlpha || 0.35) * 0.4) + ')');
     halo.addColorStop(1, 'rgba(255,255,255,0)');
     c.fillStyle = halo;
     c.beginPath();
@@ -98,7 +102,8 @@
       // streakFactor ignored — we don't streak any more, it looked ugly
     },
     triggerShootingStar() { spawnShootingStar(); },
-    triggerWarpBurst() { state.warpBurst = 1.0; }
+    triggerWarpBurst() { state.warpBurst = 1.0; },
+    rebuildSprites() { buildSprites(); }
   };
 
   // Mouse
@@ -329,9 +334,10 @@
       const tx = ss.x - (dirX / mag) * tailLen;
       const ty = ss.y - (dirY / mag) * tailLen;
 
+      const isTritanopia = document.body.classList.contains('tritanopia-mode') || document.documentElement.classList.contains('tritanopia-mode');
       const grad = ctx.createLinearGradient(ss.x, ss.y, tx, ty);
       grad.addColorStop(0, 'rgba(255,255,255,' + alpha + ')');
-      grad.addColorStop(0.4, 'rgba(200,168,255,' + (alpha * 0.4) + ')');
+      grad.addColorStop(0.4, (isTritanopia ? 'rgba(128,247,255,' : 'rgba(200,168,255,') + (alpha * 0.4) + ')');
       grad.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.strokeStyle = grad;
       ctx.lineWidth = 1.6;
