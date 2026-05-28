@@ -46,12 +46,12 @@ export function Planet() {
     if (!g || !s) return;
 
     const p = journey.progress;
-    const fade = 1 - smoothstep(0.07, 0.15, p); // dissolves as the white fill grows
-    const boost = 1 + smoothstep(0.07, 0.16, p) * 1.4;
+    const fade = 1 - smoothstep(0.05, 0.17, p); // dissolves as the white fill grows
+    const boost = 1 + smoothstep(0.05, 0.2, p) * 1.4;
 
     const wide = state.size.width > 900;
     const baseScale = wide ? 0.52 : 0.36;
-    const centering = smoothstep(0.07, 0.15, p);
+    const centering = smoothstep(0.05, 0.17, p);
     const targetX = (wide ? state.viewport.width * 0.2 : 0) * (1 - centering);
 
     g.scale.setScalar(lerp(g.scale.x, baseScale * boost, 0.1));

@@ -235,7 +235,7 @@ section {
   position: absolute;
   inset: 0 0 0 50%;
   cursor: grab;
-  z-index: 2;
+  z-index: 30; /* above the hero copy (z20) so it actually receives drags */
 }
 .planet-catcher:active {
   cursor: grabbing;
@@ -1077,7 +1077,7 @@ section {
 /* iPhone mockup */
 .iphone {
   position: relative;
-  width: 300px;
+  width: 264px;
   aspect-ratio: 1170 / 2532;
   background: #050509;
   border-radius: 46px;
@@ -1106,7 +1106,7 @@ section {
 }
 .act-phone {
   position: absolute;
-  top: 50%;
+  top: 56%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 70;
@@ -1114,6 +1114,35 @@ section {
   pointer-events: none;
   will-change: transform, opacity;
 }
+
+/* iPhone status bar (replaces the wrong Mac-browser dots) */
+.scr-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px 6px;
+  background: #08070f;
+}
+.scr-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+}
+.scr-sig {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 9px;
+}
+.scr-sig i {
+  width: 3px;
+  background: #fff;
+  border-radius: 1px;
+}
+.scr-sig i:nth-child(1) { height: 4px; }
+.scr-sig i:nth-child(2) { height: 6px; }
+.scr-sig i:nth-child(3) { height: 9px; }
 .iphone.ringing {
   animation: ring 0.5s var(--ease) infinite;
 }
@@ -1353,7 +1382,7 @@ section {
 /* beat captions */
 .act-cap {
   position: absolute;
-  top: 11%;
+  top: 5%;
   left: 0;
   right: 0;
   text-align: center;
@@ -1363,14 +1392,14 @@ section {
   pointer-events: none;
 }
 .act-cap .label-mono {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 .act-cap h3 {
   font-family: var(--font-display);
-  font-size: clamp(28px, 4.2vw, 56px);
-  line-height: 1.05;
+  font-size: clamp(24px, 3.4vw, 44px);
+  line-height: 1.06;
   margin: 0 auto;
-  max-width: 18ch;
+  max-width: 16ch;
 }
 .act-cap.on-light {
   color: var(--ink-100);

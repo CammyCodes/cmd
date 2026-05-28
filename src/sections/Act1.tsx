@@ -48,41 +48,42 @@ export function Act1() {
           journey.progress = p;
 
           // hero text + scroll cue
-          const heroOut = smoothstep(0.07, 0.14, p);
+          const heroOut = smoothstep(0.05, 0.16, p);
           set(heroText.current, 1 - heroOut, `translateY(${-40 * heroOut}px)`);
           set(cue.current, 1 - smoothstep(0.02, 0.08, p));
           if (catcher.current) catcher.current.style.pointerEvents = heroOut > 0.3 ? 'none' : 'auto';
 
-          // white bubble (clip from bottom centre) — grows, holds, drains, flashes back
+          // white bubble (clip from bottom centre): grow slowly → hold → drain
+          // to reveal the rocket → flash back for the ringing phone → drain out.
           const w = clamp01(
-            smoothstep(0.07, 0.15, p) -
-              smoothstep(0.36, 0.44, p) +
-              smoothstep(0.62, 0.68, p) -
+            smoothstep(0.06, 0.2, p) -
+              smoothstep(0.42, 0.5, p) +
+              smoothstep(0.64, 0.7, p) -
               smoothstep(0.86, 1.0, p),
           );
-          if (white.current) white.current.style.clipPath = `circle(${w * 160}% at 50% 100%)`;
+          if (white.current) white.current.style.clipPath = `circle(${w * 165}% at 50% 100%)`;
 
-          // Beat A — desktop site folds down into the phone
-          const dProg = smoothstep(0.15, 0.28, p);
-          const dVis = smoothstep(0.14, 0.17, p) * (1 - smoothstep(0.27, 0.32, p));
+          // Beat A — a desktop site appears, then shrinks/folds down into the phone
+          const dProg = smoothstep(0.16, 0.28, p);
+          const dVis = smoothstep(0.16, 0.2, p) * (1 - smoothstep(0.26, 0.31, p));
           set(
             desktop.current,
             dVis,
-            `translate(-50%,-50%) scale(${lerp(1, 0.22, dProg)}) rotateX(${lerp(0, 62, dProg)}deg)`,
+            `translate(-50%,-50%) scale(${lerp(1, 0.2, dProg)}) rotateX(${lerp(0, 55, dProg)}deg)`,
           );
-          const aIn = smoothstep(0.15, 0.21, p) * (1 - smoothstep(0.33, 0.4, p));
-          const spin = smoothstep(0.24, 0.33, p) * 360;
-          set(phoneA.current, aIn, `translate(-50%,-50%) scale(${lerp(0.9, 1, aIn)}) rotateY(${spin}deg)`);
-          set(capA.current, smoothstep(0.16, 0.22, p) * (1 - smoothstep(0.32, 0.38, p)));
+          const aIn = smoothstep(0.22, 0.28, p) * (1 - smoothstep(0.4, 0.46, p));
+          const tilt = lerp(16, 0, smoothstep(0.28, 0.4, p)); // gentle settle (no flip)
+          set(phoneA.current, aIn, `translate(-50%,-50%) scale(${lerp(0.92, 1, aIn)}) rotateY(${tilt}deg)`);
+          set(capA.current, smoothstep(0.24, 0.3, p) * (1 - smoothstep(0.4, 0.46, p)));
 
-          // Beat B — rocket caption (3D rocket itself reads journey.progress)
-          set(capB.current, smoothstep(0.45, 0.5, p) * (1 - smoothstep(0.6, 0.64, p)));
+          // Beat B — rocket caption (the 3D rocket itself reads journey.progress)
+          set(capB.current, smoothstep(0.5, 0.56, p) * (1 - smoothstep(0.62, 0.66, p)));
 
-          // Beat C — ringing phone
-          const cIn = smoothstep(0.66, 0.72, p) * (1 - smoothstep(0.84, 0.9, p));
-          set(phoneC.current, cIn, `translate(-50%,-50%) scale(${lerp(0.9, 1, cIn)})`);
+          // Beat C — ringing phone "Your next customer"
+          const cIn = smoothstep(0.7, 0.76, p) * (1 - smoothstep(0.86, 0.92, p));
+          set(phoneC.current, cIn, `translate(-50%,-50%) scale(${lerp(0.92, 1, cIn)})`);
           if (phoneC.current) phoneC.current.classList.toggle('ringing', cIn > 0.4);
-          set(capC.current, smoothstep(0.68, 0.74, p) * (1 - smoothstep(0.83, 0.89, p)));
+          set(capC.current, smoothstep(0.72, 0.78, p) * (1 - smoothstep(0.85, 0.91, p)));
         },
       });
       return () => st.kill();
@@ -127,7 +128,10 @@ export function Act1() {
         {/* Beat A phone */}
         <IPhone ref={phoneA} className="act-phone">
           <div className="scr-site">
-            <div className="scr-bar"><i /><i /><i /><span /></div>
+            <div className="scr-status">
+              <span className="scr-time">9:41</span>
+              <span className="scr-sig"><i /><i /><i /></span>
+            </div>
             <div className="scr-body">
               <p className="scr-eyebrow">Camm Design</p>
               <h5 className="scr-h">Your business, online.</h5>

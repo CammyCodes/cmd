@@ -28,6 +28,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 
     if (!reduced) {
       lenis = new Lenis({ autoRaf: false, lerp: 0.1, smoothWheel: true });
+      (window as unknown as { __lenis?: Lenis }).__lenis = lenis; // for screenshot tooling
       lenis.on('scroll', ScrollTrigger.update);
       lenis.on('scroll', onScroll);
       tick = (time: number) => lenis!.raf(time * 1000);
