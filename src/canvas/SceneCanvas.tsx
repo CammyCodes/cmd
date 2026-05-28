@@ -1,12 +1,13 @@
 import { Canvas } from '@react-three/fiber';
+import { Lights } from './Lights';
 import { Planet } from './Planet';
-import { Phone } from './Phone';
+import { Rocket } from './Rocket';
 
 /**
  * The single persistent R3F canvas, fixed full-viewport behind the DOM.
- * pointer-events:none so the page scrolls/clicks through it; the hero's
- * drag-catcher feeds planet rotation via planetControls. Future phases add
- * the phone, rocket, smoke and satellite into this same canvas.
+ * Hosts the planet (hero) and the rocket (WHY beat B). The phone is a DOM/CSS
+ * mockup (crisper, shows real UI), so it is not in here. Lights live at scene
+ * root so they survive the planet being hidden.
  */
 export function SceneCanvas() {
   return (
@@ -19,8 +20,9 @@ export function SceneCanvas() {
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         style={{ width: '100%', height: '100%' }}
       >
+        <Lights />
         <Planet />
-        <Phone />
+        <Rocket />
       </Canvas>
     </div>
   );

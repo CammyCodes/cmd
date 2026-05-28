@@ -1043,3 +1043,360 @@ section {
 @media (max-width: 900px) {
   .hero-track { height: 200vh; }
 }
+
+/* ─────────────── Act I journey (Phase 3) ─────────────── */
+.act-track {
+  position: relative;
+  height: 720vh;
+}
+.act-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.act-hero {
+  position: relative;
+  z-index: 20;
+  will-change: opacity, transform;
+}
+
+/* fluid white fill — a bubble clipped from the bottom centre */
+.act-white {
+  position: fixed;
+  inset: 0;
+  background: #f4f2f8;
+  z-index: 60;
+  pointer-events: none;
+  clip-path: circle(0% at 50% 100%);
+  will-change: clip-path;
+}
+
+/* iPhone mockup */
+.iphone {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 1170 / 2532;
+  background: #050509;
+  border-radius: 46px;
+  padding: 9px;
+  box-shadow: 0 0 0 2px #23222c, 0 40px 120px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.iphone-island {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92px;
+  height: 26px;
+  background: #000;
+  border-radius: 999px;
+  z-index: 4;
+}
+.iphone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 38px;
+  overflow: hidden;
+  background: #fff;
+}
+.act-phone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 70;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.iphone.ringing {
+  animation: ring 0.5s var(--ease) infinite;
+}
+@keyframes ring {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  20% { transform: translate(-52%, -50%) rotate(-3deg); }
+  40% { transform: translate(-48%, -50%) rotate(3deg); }
+  60% { transform: translate(-51%, -50%) rotate(-2deg); }
+  80% { transform: translate(-49%, -50%) rotate(2deg); }
+}
+
+/* phone screen — mini site */
+.scr-site {
+  height: 100%;
+  background: #08070f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.scr-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 12px 10px;
+  background: #15131e;
+}
+.scr-bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3a3548;
+}
+.scr-bar i:first-child { background: #ff5f57; }
+.scr-bar i:nth-child(2) { background: #febc2e; }
+.scr-bar i:nth-child(3) { background: #28c840; }
+.scr-bar span {
+  flex: 1;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-left: 8px;
+}
+.scr-body {
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.scr-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-20);
+  margin: 0;
+}
+.scr-h {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.05;
+  margin: 0;
+}
+.scr-btn {
+  align-self: flex-start;
+  background: var(--violet-soft);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+.scr-lines {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.scr-lines i {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.scr-lines i:nth-child(1) { width: 80%; }
+.scr-lines i:nth-child(2) { width: 60%; }
+.scr-lines i:nth-child(3) { width: 70%; }
+
+/* phone screen — incoming call */
+.scr-call {
+  height: 100%;
+  background: linear-gradient(180deg, #15131f, #08070f);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #fff;
+  padding: 24px;
+}
+.call-status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-20);
+  margin: 0;
+}
+.call-avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a2342, #0d0a1c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--violet-soft);
+  font-family: var(--font-display);
+  font-size: 30px;
+  margin: 10px 0 6px;
+}
+.call-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin: 0;
+  text-align: center;
+  line-height: 1.05;
+}
+.call-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-20);
+  margin: 0;
+}
+.call-actions {
+  display: flex;
+  gap: 44px;
+  margin-top: 26px;
+}
+.call-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+.call-btn.decline { background: #ff453a; }
+.call-btn.accept { background: #30d158; }
+
+/* Beat A — desktop site that folds into the phone */
+.act-desktop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 65;
+  width: min(72vw, 760px);
+  aspect-ratio: 16 / 10;
+  background: #08070f;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+.dk-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px;
+  background: #15131e;
+}
+.dk-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3a3548;
+}
+.dk-bar i:first-child { background: #ff5f57; }
+.dk-bar i:nth-child(2) { background: #febc2e; }
+.dk-bar i:nth-child(3) { background: #28c840; }
+.dk-bar span {
+  flex: 1;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-left: 10px;
+}
+.dk-body {
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.dk-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-20);
+  margin: 0;
+}
+.dk-h {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1.02;
+  margin: 0;
+}
+.dk-btn {
+  align-self: flex-start;
+  background: var(--violet-soft);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border-radius: 999px;
+}
+.dk-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.dk-lines i {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+}
+.dk-lines i:nth-child(1) { width: 70%; }
+.dk-lines i:nth-child(2) { width: 52%; }
+.dk-lines i:nth-child(3) { width: 62%; }
+
+/* beat captions */
+.act-cap {
+  position: absolute;
+  top: 11%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 75;
+  opacity: 0;
+  padding: 0 24px;
+  pointer-events: none;
+}
+.act-cap .label-mono {
+  margin-bottom: 10px;
+}
+.act-cap h3 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.2vw, 56px);
+  line-height: 1.05;
+  margin: 0 auto;
+  max-width: 18ch;
+}
+.act-cap.on-light {
+  color: var(--ink-100);
+}
+.act-cap.on-light .label-mono {
+  color: var(--violet-deep);
+}
+.act-cap.on-light h3 em {
+  color: var(--violet-deep);
+  font-style: italic;
+  font-weight: 300;
+}
+.act-cap.on-dark {
+  color: #fff;
+}
+.act-cap.on-dark .label-mono {
+  color: var(--ink-20);
+}
+.act-cap.on-dark h3 em {
+  color: var(--violet-soft);
+  font-style: italic;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .act-track { height: 620vh; }
+  .iphone { width: 228px; }
+  .act-desktop { width: 86vw; }
+}
