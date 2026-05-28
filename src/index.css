@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────── design tokens ───────────────────────────
+   Carried forward from the live site (agreed hybrid: a restrained violet
+   accent on a near-monochrome ink foundation). Violet earns its place only
+   on CTAs, the recommended pricing tier, heading <em> highlights, hover,
+   focus, the journey/cinematic moments, and sparse star twinkle. */
+:root {
+  --ink-100: #000;
+  --ink-95: #060509;
+  --ink-90: #0a0910;
+  --ink-80: #13121c;
+  --ink-70: #1c1a28;
+  --ink-60: #2a2738;
+  --ink-40: #5a5670;
+  --ink-30: #8e8aa6;
+  --ink-20: #a8a4be;
+  --paper: #fff;
+  --paper-90: #f2f0f7;
+
+  --violet: #9b7bff;
+  --violet-soft: #c8a8ff;
+  --violet-deep: #6a48e0;
+  --violet-near: #1a0f3d;
+  --violet-rgb: 155, 123, 255;
+  --violet-soft-rgb: 200, 168, 255;
+  --violet-deep-rgb: 106, 72, 224;
+
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 32px;
+  --r-xl: 48px;
+  --r-full: 999px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --max: 1280px;
+
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'Cascadia Code', monospace;
+}
+
+/* Tritanopia colour-blind filter: remap the accent to cyan/teal. */
+html.tritanopia-mode {
+  --violet: #00e5ff;
+  --violet-soft: #80f7ff;
+  --violet-deep: #00838f;
+  --violet-near: #002f35;
+  --violet-rgb: 0, 229, 255;
+  --violet-soft-rgb: 128, 247, 255;
+  --violet-deep-rgb: 0, 131, 143;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink-100);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+body {
+  background:
+    radial-gradient(1200px 800px at 80% -10%, rgba(var(--violet-rgb), 0.06), transparent 60%),
+    radial-gradient(900px 700px at -10% 40%, rgba(var(--violet-deep-rgb), 0.05), transparent 60%),
+    var(--ink-100);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Display serif + mono helpers */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ─────────────────────────── reveal on scroll ─────────────────────────── */
+.rv {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+}
+.rv.in {
+  opacity: 1;
+  transform: none;
+}
+.rv.d1 {
+  transition-delay: 0.08s;
+}
+.rv.d2 {
+  transition-delay: 0.16s;
+}
+.rv.d3 {
+  transition-delay: 0.24s;
+}
+.rv.d4 {
+  transition-delay: 0.32s;
+}
+
+::selection {
+  background: var(--violet-soft);
+  color: var(--ink-100);
+}
+:focus-visible {
+  outline: 2px solid var(--violet-soft);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ─────────────────────────── reduced motion (hard requirement) ───────────
+   Neutralise every loop/intro animation; one-shots resolve to end-state. */
+@media (prefers-reduced-motion: reduce) {
+  .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+  }
+}
