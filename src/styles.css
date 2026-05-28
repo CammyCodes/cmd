@@ -1017,3 +1017,29 @@ section {
 .skip-link:focus {
   left: 0;
 }
+
+/* ─────────────── hero cinematic (Phase 2) ─────────────── */
+.hero-track {
+  position: relative;
+  height: 250vh;
+}
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-white {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  z-index: 60;
+  pointer-events: none;
+  will-change: opacity;
+}
+@media (max-width: 900px) {
+  .hero-track { height: 200vh; }
+}

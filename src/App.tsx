@@ -4,7 +4,7 @@ import { SmoothScroll } from './components/SmoothScroll';
 import { Starfield2D } from './components/layout/Starfield2D';
 import { SceneCanvas } from './canvas/SceneCanvas';
 import { Nav } from './components/Nav';
-import { Hero } from './sections/Hero';
+import { HeroCinematic } from './sections/HeroCinematic';
 import { Pricing } from './sections/Pricing';
 import { Work } from './sections/Work';
 import { Launch } from './sections/Launch';
@@ -61,7 +61,7 @@ export default function App() {
       <SceneCanvas />
       <main id="main" style={{ position: 'relative', zIndex: 10 }}>
         <Nav />
-        <Hero />
+        <HeroCinematic />
         <WhyPlaceholder />
         <HowPlaceholder />
         <Pricing />
