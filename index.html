@@ -1792,7 +1792,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
   scene.add(planetGroup);
 
   const sphere = new THREE.Mesh(geometry, material);
-  sphere.rotation.y = -Math.PI / 2; // Face text forward on load
+  sphere.rotation.y = Math.PI / 2; // Face text forward on load
   planetGroup.add(sphere);
 
   // Setup Lights
