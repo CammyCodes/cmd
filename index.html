@@ -1602,10 +1602,10 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     ctx.fillStyle = '#0a081a';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Faint atmospheric coloring (large gradients)
+    // Faint atmospheric coloring (large gradients, cy constrained to equatorial regions)
     for (let i = 0; i < 6; i++) {
       const cx = Math.random() * canvas.width;
-      const cy = Math.random() * canvas.height;
+      const cy = 200 + Math.random() * 624;
       const radius = 250 + Math.random() * 300;
       const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
       grad.addColorStop(0, 'rgba(42, 35, 66, 0.45)');
@@ -1617,31 +1617,40 @@ body.tritanopia-mode .crew-photo .silhouette::before {
       ctx.fill();
     }
 
-    // Add fine star-like basalt dust
+    // Add fine star-like basalt dust (faded at poles)
     for (let i = 0; i < 15000; i++) {
       const x = Math.random() * canvas.width;
       const y = Math.random() * canvas.height;
       const r = Math.random() * 1.5;
-      ctx.fillStyle = `rgba(200, 168, 255, ${Math.random() * 0.12})`;
+      const fade = Math.sin((y / canvas.height) * Math.PI);
+      ctx.fillStyle = `rgba(200, 168, 255, ${Math.random() * 0.12 * fade})`;
       ctx.beginPath();
       ctx.arc(x, y, r, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Add hairline fissures / basalt lines
-    ctx.strokeStyle = 'rgba(200, 168, 255, 0.1)';
+    // Add hairline fissures / basalt lines (faded near seams and poles)
     ctx.lineWidth = 1;
     for (let i = 0; i < 12; i++) {
-      ctx.beginPath();
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
-      ctx.moveTo(x, y);
       for (let j = 0; j < 15; j++) {
-        x += (Math.random() - 0.5) * 140;
-        y += (Math.random() - 0.5) * 140;
-        ctx.lineTo(x, y);
+        const nextX = x + (Math.random() - 0.5) * 140;
+        const nextY = y + (Math.random() - 0.5) * 140;
+
+        const fadeX = Math.sin((nextX / canvas.width) * Math.PI);
+        const fadeY = Math.sin((nextY / canvas.height) * Math.PI);
+        const fade = Math.max(0, fadeX * fadeY);
+
+        ctx.strokeStyle = `rgba(200, 168, 255, ${0.1 * fade})`;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(nextX, nextY);
+        ctx.stroke();
+
+        x = nextX;
+        y = nextY;
       }
-      ctx.stroke();
     }
 
     // Draw etched cmd text using Fraunces italic font
@@ -1681,58 +1690,86 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     ctx.fillStyle = 'rgb(128,128,128)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Add noise height
+    // Add noise height (faded at poles)
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imgData.data;
     for (let i = 0; i < data.length; i += 4) {
-      const noise = (Math.random() - 0.5) * 18;
+      const pixelIndex = i / 4;
+      const y = Math.floor(pixelIndex / canvas.width);
+      const fade = Math.sin((y / canvas.height) * Math.PI);
+      const noise = (Math.random() - 0.5) * 18 * fade;
       data[i] = Math.max(0, Math.min(255, data[i] + noise));
       data[i+1] = Math.max(0, Math.min(255, data[i+1] + noise));
       data[i+2] = Math.max(0, Math.min(255, data[i+2] + noise));
     }
     ctx.putImageData(imgData, 0, 0);
 
+    // Wrapped & Faded Craters helper
+    function drawWrappedCrater(cx, cy, radius) {
+      const fadeY = Math.sin((cy / canvas.height) * Math.PI);
+      const intensity = fadeY * fadeY; // Exponential falloff near poles
+      if (intensity < 0.1) return; // Skip poles completely to prevent polar stretching
+
+      const drawCraterAt = (x) => {
+        // Crater Rim
+        const rim = ctx.createRadialGradient(x, cy, radius * 0.75, x, cy, radius);
+        rim.addColorStop(0, 'rgba(128,128,128,0)');
+        rim.addColorStop(0.5, `rgba(180,180,180,${0.4 * intensity})`);
+        rim.addColorStop(1, 'rgba(128,128,128,0)');
+        ctx.fillStyle = rim;
+        ctx.beginPath();
+        ctx.arc(x, cy, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Crater Bowl
+        const bowl = ctx.createRadialGradient(x, cy, 0, x, cy, radius * 0.75);
+        bowl.addColorStop(0, `rgba(60,60,60,${0.5 * intensity})`);
+        bowl.addColorStop(0.7, `rgba(95,95,95,${0.25 * intensity})`);
+        bowl.addColorStop(1, 'rgba(128,128,128,0)');
+        ctx.fillStyle = bowl;
+        ctx.beginPath();
+        ctx.arc(x, cy, radius * 0.75, 0, Math.PI * 2);
+        ctx.fill();
+      };
+
+      drawCraterAt(cx);
+      // Wrap-around horizontally
+      if (cx - radius < 0) {
+        drawCraterAt(cx + canvas.width);
+      } else if (cx + radius > canvas.width) {
+        drawCraterAt(cx - canvas.width);
+      }
+    }
+
     // Draw bump map craters
     for (let i = 0; i < 35; i++) {
       const cx = Math.random() * canvas.width;
       const cy = Math.random() * canvas.height;
       const radius = 25 + Math.random() * 70;
-
-      // Crater Rim
-      const rim = ctx.createRadialGradient(cx, cy, radius * 0.75, cx, cy, radius);
-      rim.addColorStop(0, 'rgba(128,128,128,0)');
-      rim.addColorStop(0.5, 'rgba(180,180,180,0.4)'); // Raised rim
-      rim.addColorStop(1, 'rgba(128,128,128,0)');
-      ctx.fillStyle = rim;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Crater Bowl
-      const bowl = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.75);
-      bowl.addColorStop(0, 'rgba(60,60,60,0.5)'); // Deep center
-      bowl.addColorStop(0.7, 'rgba(95,95,95,0.25)');
-      bowl.addColorStop(1, 'rgba(128,128,128,0)');
-      ctx.fillStyle = bowl;
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius * 0.75, 0, Math.PI * 2);
-      ctx.fill();
+      drawWrappedCrater(cx, cy, radius);
     }
 
-    // Draw bump map basalt cracks
-    ctx.strokeStyle = 'rgba(40,40,40,0.45)'; // Engraved lines
-    ctx.lineWidth = 2.5;
+    // Draw bump map basalt cracks (faded near seams and poles)
     for (let i = 0; i < 18; i++) {
-      ctx.beginPath();
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
-      ctx.moveTo(x, y);
       for (let j = 0; j < 12; j++) {
-        x += (Math.random() - 0.5) * 110;
-        y += (Math.random() - 0.5) * 110;
-        ctx.lineTo(x, y);
+        const nextX = x + (Math.random() - 0.5) * 110;
+        const nextY = y + (Math.random() - 0.5) * 110;
+
+        const fadeX = Math.sin((nextX / canvas.width) * Math.PI);
+        const fadeY = Math.sin((nextY / canvas.height) * Math.PI);
+        const fade = Math.max(0, fadeX * fadeY);
+
+        ctx.strokeStyle = `rgba(40,40,40,${0.45 * fade})`;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(nextX, nextY);
+        ctx.stroke();
+
+        x = nextX;
+        y = nextY;
       }
-      ctx.stroke();
     }
 
     // Draw beveled etched cmd text
@@ -1776,6 +1813,10 @@ body.tritanopia-mode .crew-photo .silhouette::before {
   const geometry = new THREE.SphereGeometry(2, 64, 64);
   const colorMap = new THREE.CanvasTexture(createPlanetTexture());
   const bumpMap = new THREE.CanvasTexture(createPlanetBumpMap());
+
+  // Enable horizontal wrapping to eliminate WebGL filtering seams
+  colorMap.wrapS = THREE.RepeatWrapping;
+  bumpMap.wrapS = THREE.RepeatWrapping;
 
   const material = new THREE.MeshStandardMaterial({
     map: colorMap,
