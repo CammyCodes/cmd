@@ -63,7 +63,7 @@ export function Planet() {
     mat.opacity = fade;
     mat.depthWrite = fade > 0.5;
 
-    s.rotation.y = lerp(s.rotation.y, -Math.PI / 2 + planetControls.targetRotY, 0.12);
+    s.rotation.y = lerp(s.rotation.y, Math.PI / 2 + planetControls.targetRotY, 0.12);
     s.rotation.x = lerp(s.rotation.x, planetControls.targetRotX, 0.12);
 
     if (!planetControls.dragging && !reducedMotion) {
@@ -78,7 +78,7 @@ export function Planet() {
 
   return (
     <group ref={group} rotation={[0, 0, -0.38]} scale={0.4}>
-      <mesh ref={sphere} rotation={[0, -Math.PI / 2, 0]}>
+      <mesh ref={sphere} rotation={[0, Math.PI / 2, 0]}>
         <sphereGeometry args={[2, 64, 64]} />
         <meshStandardMaterial
           map={textures.map}
