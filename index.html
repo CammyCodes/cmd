@@ -1814,7 +1814,8 @@ body.tritanopia-mode .crew-photo .silhouette::before {
   let previousMousePosition = { x: 0, y: 0 };
   let velocityY = 0;
   let velocityX = 0;
-  const friction = 0.95;
+  const friction = 0.985;
+  const dragSensitivity = 0.012;
 
   // Mouse / Touch Event Listeners for interactive rotation
   function onStart(e) {
@@ -1822,8 +1823,9 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     previousMousePosition = { x: clientX, y: clientY };
-    velocityY = 0;
-    velocityX = 0;
+    // Preserves 50% of current velocity so consecutive flicks build speed
+    velocityY *= 0.5;
+    velocityX *= 0.5;
   }
 
   function onMove(e) {
@@ -1836,15 +1838,15 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     const deltaY = clientY - previousMousePosition.y;
 
     // Apply rotation relative to tilted frame
-    sphere.rotation.y += deltaX * 0.006;
-    sphere.rotation.x += deltaY * 0.006;
+    sphere.rotation.y += deltaX * dragSensitivity;
+    sphere.rotation.x += deltaY * dragSensitivity;
 
     // Constrain X rotation to prevent flipping upside down
     sphere.rotation.x = Math.max(-Math.PI / 2.2, Math.min(Math.PI / 2.2, sphere.rotation.x));
 
     // Smooth out the tracked velocity to capture flick speed
-    const currentVelY = deltaX * 0.006;
-    const currentVelX = deltaY * 0.006;
+    const currentVelY = deltaX * dragSensitivity;
+    const currentVelX = deltaY * dragSensitivity;
     velocityY = velocityY * 0.4 + currentVelY * 0.6;
     velocityX = velocityX * 0.4 + currentVelX * 0.6;
 
@@ -1887,34 +1889,21 @@ body.tritanopia-mode .crew-photo .silhouette::before {
         velocityX = 0;
       }
     } else {
-      const speed = Math.sqrt(velocityY * velocityY + velocityX * velocityX);
+      // 1. Continuous rotation update
+      sphere.rotation.y += velocityY;
+      sphere.rotation.x += velocityX;
       
-      if (speed > 0.0002) {
-        // Apply inertia to rotation
-        sphere.rotation.y += velocityY;
-        sphere.rotation.x += velocityX;
-        
-        // Constrain X rotation to prevent flipping upside down
-        sphere.rotation.x = Math.max(-Math.PI / 2.2, Math.min(Math.PI / 2.2, sphere.rotation.x));
-        
-        // Apply friction damping
-        velocityY *= friction;
-        velocityX *= friction;
-        
-        // Keep lastInteractionTime fresh while spinning with inertia
-        lastInteractionTime = Date.now();
-      } else {
-        // Return phase: inertia has died down, return to auto-spin and 0-tilt
-        const timeSinceDrag = Date.now() - lastInteractionTime;
-        if (timeSinceDrag > 1500) {
-          // Slowly ease vertical tilt (X-rotation) back to level (0)
-          sphere.rotation.x += (0 - sphere.rotation.x) * 0.015;
-          
-          // Resume forward auto-spinning Y-rotation, easing speed up over 2 seconds
-          const easeFactor = Math.min(1, (timeSinceDrag - 1500) / 2000);
-          sphere.rotation.y += autoSpinSpeed * easeFactor;
-        }
-      }
+      // Constrain X rotation to prevent flipping upside down
+      sphere.rotation.x = Math.max(-Math.PI / 2.2, Math.min(Math.PI / 2.2, sphere.rotation.x));
+      
+      // 2. Continuous decay towards baseline states:
+      // Y-velocity decays toward default auto-spin speed
+      velocityY = velocityY * friction + autoSpinSpeed * (1 - friction);
+      // X-velocity decays toward 0
+      velocityX *= friction;
+      
+      // Vertical tilt slowly decays back to level (0)
+      sphere.rotation.x += (0 - sphere.rotation.x) * 0.005;
     }
 
     renderer.render(scene, camera);
