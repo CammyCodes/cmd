@@ -1652,9 +1652,13 @@ body.tritanopia-mode .crew-photo .silhouette::before {
         const nextX = x + (Math.random() - 0.5) * 140;
         const nextY = y + (Math.random() - 0.5) * 140;
 
-        const fadeX = Math.sin((nextX / canvas.width) * Math.PI);
         const fadeY = Math.sin((nextY / canvas.height) * Math.PI);
-        const fade = Math.max(0, fadeX * fadeY);
+        let fadeX = 1;
+        if (nextX < 64) fadeX = nextX / 64;
+        else if (nextX > canvas.width - 64) fadeX = (canvas.width - nextX) / 64;
+        fadeX = Math.max(0, fadeX);
+
+        const fade = fadeX * fadeY;
 
         ctx.strokeStyle = `rgba(200, 168, 255, ${0.1 * fade})`;
         ctx.beginPath();
@@ -1711,8 +1715,13 @@ body.tritanopia-mode .crew-photo .silhouette::before {
       const pixelIndex = i / 4;
       const x = pixelIndex % canvas.width;
       const y = Math.floor(pixelIndex / canvas.width);
+      
       const fadeY = Math.sin((y / canvas.height) * Math.PI);
-      const fadeX = Math.sin((x / canvas.width) * Math.PI);
+      let fadeX = 1;
+      if (x < 16) fadeX = x / 16;
+      else if (x > canvas.width - 16) fadeX = (canvas.width - x) / 16;
+      fadeX = Math.max(0, fadeX);
+      
       const fade = fadeX * fadeY;
       const noise = (Math.random() - 0.5) * 18 * fade;
       data[i] = Math.max(0, Math.min(255, data[i] + noise));
@@ -1767,6 +1776,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     }
 
     // Draw bump map basalt cracks (faded near seams and poles)
+    ctx.lineWidth = 2.5; // RESTORED line width for detailed depth
     for (let i = 0; i < 18; i++) {
       let x = Math.random() * canvas.width;
       let y = Math.random() * canvas.height;
@@ -1774,9 +1784,13 @@ body.tritanopia-mode .crew-photo .silhouette::before {
         const nextX = x + (Math.random() - 0.5) * 110;
         const nextY = y + (Math.random() - 0.5) * 110;
 
-        const fadeX = Math.sin((nextX / canvas.width) * Math.PI);
         const fadeY = Math.sin((nextY / canvas.height) * Math.PI);
-        const fade = Math.max(0, fadeX * fadeY);
+        let fadeX = 1;
+        if (nextX < 64) fadeX = nextX / 64;
+        else if (nextX > canvas.width - 64) fadeX = (canvas.width - nextX) / 64;
+        fadeX = Math.max(0, fadeX);
+
+        const fade = fadeX * fadeY;
 
         ctx.strokeStyle = `rgba(40,40,40,${0.45 * fade})`;
         ctx.beginPath();
