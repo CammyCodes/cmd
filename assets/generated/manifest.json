@@ -1,0 +1,42 @@
+{
+  "_about": "Image slots for the cmd site. Generate each image from its prompt at the given dimensions, save it to assets/generated/<file>. It then appears on the page automatically — each slot's <img> already points at this path, and an on-brand SVG line-art fallback shows until the file exists. No code edit needed; just drop the files in and reload.",
+  "_style": "Pure black background. A single galaxy-violet accent only (#9B7BFF / #C8A8FF) — no other colours. No readable text or logos. Photorealistic / cinematic, subtle film grain. Must match cmd-brand.md section 10 (astrophotography, no stock cliché, no rocket-emoji kitsch).",
+  "_placement": "Each slot is a <div class=\"viz\" data-gen-id=\"<id>\"> in index.html containing <img class=\"gen-img\" src=\"assets/generated/<file>\"> plus the same prompt inline as an HTML comment.",
+  "slots": [
+    {
+      "id": "why-phone",
+      "file": "why-phone.png",
+      "dims": "1200x800",
+      "alt": "A smartphone in space with a faded desktop screen condensing into it",
+      "prompt": "A single sleek smartphone floating upright in deep black space, its screen glowing with a faint violet minimal website; behind it a larger faded desktop screen condensing/dissolving into the phone to suggest mobile-first design. Pure black background, one lilac accent (#C8A8FF) and nothing else. Photorealistic 3D render, soft studio light, subtle film grain, no readable text."
+    },
+    {
+      "id": "why-fast",
+      "file": "why-fast.png",
+      "dims": "1200x800",
+      "alt": "A violet light streak racing across black, conveying instant speed",
+      "prompt": "A glowing violet light-streak / comet tearing across pure black space, conveying instant speed and a site that loads in a blink; long motion-blur trail. Monochrome black with a single galaxy-violet accent (#9B7BFF), nothing else. Cinematic, photorealistic, no readable text."
+    },
+    {
+      "id": "why-rings",
+      "file": "why-rings.png",
+      "dims": "1200x800",
+      "alt": "A smartphone with violet call rings radiating outward against black",
+      "prompt": "A smartphone on pure black space with concentric violet call/sound rings radiating outward and a small glowing 'incoming call' violet dot, conveying the phone ringing with new leads. One galaxy-violet accent (#9B7BFF), the rest monochrome. Photorealistic 3D render, soft glow, subtle grain, no readable text."
+    },
+    {
+      "id": "how-blueprint",
+      "file": "how-blueprint.png",
+      "dims": "1280x768",
+      "alt": "Glowing violet wireframe blueprint of a website floating in space",
+      "prompt": "A glowing violet holographic wireframe blueprint of a website page floating in deep black space — thin luminous lilac lines forming a browser/page layout like a hologram schematic, with a faint dark grid behind it. Pure black background, a single galaxy-violet accent (#9B7BFF / #C8A8FF) and nothing else. Cinematic, photorealistic holographic render, soft glow, subtle film grain, no readable text."
+    },
+    {
+      "id": "how-orbit",
+      "file": "how-orbit.png",
+      "dims": "1280x768",
+      "alt": "Small dark planet with a single satellite on an orbital ring against black",
+      "prompt": "A small dark terrestrial planet against pure black space with a faint violet rim-light along one edge and a single tiny satellite on a thin orbital ring around it; a calm, always-live feeling. Telescope-style astrophotography, monochrome with one lilac accent (#C8A8FF), photorealistic, subtle grain. No rings-clipart, no readable text."
+    }
+  ]
+}
