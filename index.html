@@ -292,6 +292,10 @@ section{position:relative;z-index:1;}
 /* How-stage vizzes */
 .stage-art .viz{position:absolute;inset:0;}
 .stage-art .viz .poster{filter:drop-shadow(0 0 12px rgba(var(--violet-rgb),.20));}
+/* hover / tap: gently enlarge the How visuals (image or SVG fallback) */
+.stage-art .viz .gen-img,.stage-art .viz .poster{transition:transform .5s var(--ease);will-change:transform;}
+.stage-art:hover .viz .gen-img,.stage-art:active .viz .gen-img,
+.stage-art:hover .viz .poster,.stage-art:active .viz .poster{transform:scale(1.06);}
 .vz-scan{transform-box:view-box;animation:vizScan 4s ease-in-out infinite;}
 .vz-pin{transform-box:fill-box;transform-origin:center;animation:vizPulse 2.4s ease-in-out infinite;}
 .vz-pin.p2{animation-delay:.4s;}
@@ -307,6 +311,8 @@ section{position:relative;z-index:1;}
 @media (prefers-reduced-motion:reduce){
   .vz-float,.vz-needle,.vz-bell,.vz-wave,.vz-bar,.vz-scan,.vz-pin,.vz-rocket,.vz-flame,.vz-sat,.vz-pulse{animation:none!important;}
   .vz-wave,.vz-pulse{opacity:.4!important;}
+  .stage-art .viz .gen-img,.stage-art .viz .poster{transition:none!important;}
+  .stage-art:hover .viz .gen-img,.stage-art:active .viz .gen-img,.stage-art:hover .viz .poster,.stage-art:active .viz .poster{transform:none!important;}
 }
 
 /* ───────────── journey / process ───────────── */
