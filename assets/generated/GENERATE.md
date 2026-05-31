@@ -15,7 +15,7 @@ Each slot in `index.html` looks like:
 - If it 404s (not generated yet), `onerror` drops the `<img>` and the SVG fallback stays. So the page is never broken.
 
 ## What to generate
-Source of truth is [`manifest.json`](manifest.json). For each entry: generate from `prompt` at `dims`, save as `assets/generated/<file>` (PNG). The rocket scene (How, stage 2) is intentionally NOT here — it stays as the hand-built SVG.
+Source of truth is [`manifest.json`](manifest.json). For each entry: generate from `prompt` at `dims`, save as `assets/generated/<file>` (PNG). The rocket scene (How, stage 2) now has a slot too — the hand-built rocket SVG stays as its fallback until `how-rocket.png` is generated.
 
 | id | file | dims |
 |---|---|---|
@@ -24,6 +24,7 @@ Source of truth is [`manifest.json`](manifest.json). For each entry: generate fr
 | why-rings | why-rings.png | 1280×768 → use 1200×800 ok |
 | how-blueprint | how-blueprint.png | 1280×768 |
 | how-orbit | how-orbit.png | 1280×768 |
+| how-rocket | how-rocket.png | 1280×768 |
 
 (Images are shown with `object-fit: cover`, so exact aspect isn't critical — any close ratio crops cleanly.)
 

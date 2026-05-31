@@ -37,6 +37,13 @@
       "dims": "1280x768",
       "alt": "Small dark planet with a single satellite on an orbital ring against black",
       "prompt": "A small dark terrestrial planet against pure black space with a faint violet rim-light along one edge and a single tiny satellite on a thin orbital ring around it; a calm, always-live feeling. Telescope-style astrophotography, monochrome with one lilac accent (#C8A8FF), photorealistic, subtle grain. No rings-clipart, no readable text."
+    },
+    {
+      "id": "how-rocket",
+      "file": "how-rocket.png",
+      "dims": "1280x768",
+      "alt": "A rocket launching through space with a violet exhaust trail",
+      "prompt": "A sleek rocket launching upward through deep black space, leaving a glowing violet exhaust trail and a faint violet rim-light along its body; a sense of liftoff and momentum. Pure black background, a single galaxy-violet accent (#9B7BFF / #C8A8FF) and nothing else. Cinematic, photorealistic 3D render, subtle film grain, no readable text."
     }
   ]
 }
