@@ -715,6 +715,10 @@ section{position:relative;z-index:1;}
 .work-card:nth-child(even){grid-template-columns:1fr 1.15fr;}
 .work-card:nth-child(even) .work-art{order:2;}
 .work-card:nth-child(even) .work-text{order:1;}
+.work-disclaimer{
+  color:var(--ink-30);font-size:14px;line-height:1.6;margin-top:14px;max-width:56ch;
+  padding-left:14px;border-left:2px solid rgba(200,168,255,.30);
+}
 .work-text .meta{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-30);margin-bottom:18px;display:inline-flex;align-items:center;gap:10px;}
 .work-text .meta::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--violet);box-shadow:0 0 10px var(--violet);}
 .work-text h3{font-family:"Fraunces",serif;font-weight:400;font-variation-settings:"opsz" 96;font-size:44px;line-height:1.0;letter-spacing:-.02em;margin:0 0 18px;}
@@ -1053,7 +1057,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
         <p class="hero-lede">We design, build and host websites for small businesses. Clear, fast and made to bring in real customers — not just sit there looking pretty.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="#launch">Start a project <span class="arr">→</span></a>
-          <a class="btn btn-ghost" href="#work">See our work</a>
+          <a class="btn btn-ghost" href="#work">See sample work</a>
         </div>
         <div class="hero-meta">
           <span class="chip">Based in London</span>
@@ -1440,10 +1444,11 @@ body.tritanopia-mode .crew-photo .silhouette::before {
 <section class="work" id="work">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow rv"><span class="dot"></span><span class="type-on">004 / Recent work</span></span>
+      <span class="eyebrow rv"><span class="dot"></span><span class="type-on">004 / Sample work</span></span>
       <span class="sec-rule"></span>
-      <h2 class="rise"><span>A few sites <em>we're proud of.</em></span></h2>
-      <p class="rv d2">Real businesses. Real results. Click through to see them live.</p>
+      <h2 class="rise"><span>A few builds <em>we're proud of.</em></span></h2>
+      <p class="rv d2">Click through to see them live.</p>
+      <p class="rv d2 work-disclaimer">These are demonstration builds created to show our approach, not commissioned client projects.</p>
     </div>
 
     <div class="work-grid">
@@ -1460,10 +1465,10 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           </div>
         </div>
         <div class="work-text">
-          <div class="meta">CammBot · AI assistant · 2026</div>
+          <div class="meta">CammBot · Our own product · 2026</div>
           <h3 class="serif">CammBot</h3>
-          <p class="what">A custom AI helper for tradespeople and small businesses. It writes quotes, drafts emails and handles invoices — so the owner gets an evening back every week.</p>
-          <div class="result">Quotes in 3 minutes, not an hour</div><br />
+          <p class="what">Our own AI helper, built for tradespeople and small businesses. It writes quotes, drafts emails and handles invoices.</p>
+          <div class="result">Built and run by us</div><br />
           <a class="visit" href="https://cammycodes.github.io/Camm/" target="_blank" rel="noreferrer">Visit live site →</a>
         </div>
       </article>
@@ -1480,10 +1485,10 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           </div>
         </div>
         <div class="work-text">
-          <div class="meta">House of Recovery · Wellness · Worksop</div>
+          <div class="meta">House of Recovery · Demonstration build · Wellness</div>
           <h3 class="serif">House of Recovery</h3>
-          <p class="what">A premium recovery studio that needed to feel clinical, not spa-like. Long-form editorial design, clean booking flow, prices visible up front.</p>
-          <div class="result">Bookings up · bounce rate halved</div><br />
+          <p class="what">A demonstration build for a premium recovery studio — designed to feel clinical, not spa-like. Long-form editorial layout, clean booking flow, prices visible up front.</p>
+          <div class="result">Demonstration build · not a client project</div><br />
           <a class="visit" href="https://cammycodes.github.io/HouseOfRecovery/" target="_blank" rel="noreferrer">Visit live site →</a>
         </div>
       </article>
@@ -1500,10 +1505,10 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           </div>
         </div>
         <div class="work-text">
-          <div class="meta">cmd · Studio site · London</div>
+          <div class="meta">cmd · Our own site · London</div>
           <h3 class="serif">cmd itself.</h3>
-          <p class="what">The site you're on. Built as our calling card — every animation, transition and detail is the same care we put into client work.</p>
-          <div class="result">Sub-1s load · works on any phone</div><br />
+          <p class="what">The site you're on. Built as our calling card — every animation, transition and detail is the same care we put into every build.</p>
+          <div class="result">Our own site · built by us</div><br />
           <a class="visit" href="#top">Back to top →</a>
         </div>
       </article>
