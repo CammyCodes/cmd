@@ -519,23 +519,6 @@ section{position:relative;z-index:1;}
 
 .build-foot{margin-top:32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-30);}
 
-.offer-banner{
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-  padding:18px 24px;border-radius:var(--r-full);
-  background:linear-gradient(90deg, rgba(155,123,255,.18), rgba(155,123,255,.06));
-  border:1px solid rgba(200,168,255,.30);
-  margin:32px 0 0;
-  color:var(--paper);font-size:14px;
-}
-.offer-banner strong{
-  font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--ink-100);background:var(--violet-soft);padding:6px 12px;border-radius:var(--r-full);
-}
-.offer-banner span:last-child{color:var(--ink-20);}
-.offer-pulse{
-  width:10px;height:10px;border-radius:50%;background:var(--violet-soft);box-shadow:0 0 12px var(--violet-soft);
-  animation:pulse 1.8s ease-in-out infinite;flex-shrink:0;
-}
 
 @media(max-width:900px){
   .ptable-wrap{overflow-x:auto;}
@@ -686,17 +669,6 @@ section{position:relative;z-index:1;}
   }
   .ptable-mobile-cards {
     display: flex;
-  }
-  .offer-banner {
-    border-radius: 16px;
-    padding: 20px;
-    gap: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-  }
-  .offer-banner strong {
-    font-size: 10px;
-    padding: 4px 10px;
   }
 }
 
@@ -859,7 +831,7 @@ section{position:relative;z-index:1;}
 
 /* ───────────── footer ───────────── */
 .foot{padding:80px 0 48px;border-top:1px solid rgba(255,255,255,.06);position:relative;}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:64px;}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px;}
 .foot-brand{font-family:"Fraunces",serif;font-size:22px;font-style:italic;font-variation-settings:"opsz" 24;letter-spacing:-0.02em;display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;text-transform:lowercase;}
 .foot-brand .cursor{display:inline-block;width:9px;height:14px;background:var(--paper);transform:translateY(1px);border-radius:1px;}
 .foot-tag{font-family:"Fraunces",serif;font-style:italic;font-weight:300;font-size:24px;color:var(--paper);max-width:18ch;font-variation-settings:"opsz" 48;}
@@ -867,7 +839,10 @@ section{position:relative;z-index:1;}
 .foot-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
 .foot-col a{color:var(--paper-90);font-size:14px;transition:color .2s var(--ease);}
 .foot-col a:hover{color:var(--violet-soft);}
-.foot-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-30);}
+.foot-bot{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-30);}
+.trader-id{display:flex;flex-direction:column;gap:6px;max-width:62ch;text-transform:none;letter-spacing:.04em;line-height:1.6;}
+.trader-id .legal-name{color:var(--ink-20);}
+.trader-id .pending{color:var(--ink-30);font-style:normal;}
 .signature{font-family:"Fraunces",serif;font-style:italic;font-weight:300;font-size:13px;color:rgba(255,255,255,.4);font-variation-settings:"opsz" 12;text-transform:none;letter-spacing:0;}
 .signature:hover{color:var(--violet-soft);}
 @media(max-width:900px){.foot-grid{grid-template-columns:1fr;gap:40px;}}
@@ -1116,7 +1091,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
         </div>
         <div class="problem-body">
           <h3>Built for phones first.</h3>
-          <p>Seven in ten visitors arrive on a phone. We design for that screen first.</p>
+          <p>Most visitors arrive on a phone. We design for that screen first.</p>
         </div>
       </div>
       <div class="problem-card rv d2">
@@ -1128,12 +1103,12 @@ body.tritanopia-mode .crew-photo .silhouette::before {
             <path d="M42 96 A58 58 0 0 1 100 38" stroke="var(--violet)" stroke-width="3" stroke-linecap="round"/>
             <line class="vz-needle" x1="100" y1="96" x2="100" y2="50" stroke="var(--violet-soft)" stroke-width="3" stroke-linecap="round"/>
             <circle cx="100" cy="96" r="5" fill="var(--violet-soft)"/>
-            <text x="100" y="126" text-anchor="middle" fill="var(--violet-soft)" font-family="'Geist Mono',monospace" font-size="13" letter-spacing="1">0.8S</text>
+            <text x="100" y="126" text-anchor="middle" fill="var(--violet-soft)" font-family="'Geist Mono',monospace" font-size="13" letter-spacing="1">FAST</text>
           </svg>
         </div>
         <div class="problem-body">
-          <h3>Loads in under a second.</h3>
-          <p>Slow sites lose half their visitors. Ours open instantly — even on a weak signal.</p>
+          <h3>Built to load fast.</h3>
+          <p>Slow sites lose visitors. Ours are built to open quickly — even on a weak signal.</p>
         </div>
       </div>
       <div class="problem-card rv d3">
@@ -1248,12 +1223,12 @@ body.tritanopia-mode .crew-photo .silhouette::before {
       <div class="stage rv-scale" data-stage="3">
         <div class="stage-text rv-left">
           <span class="tag">Ongoing — Orbit</span>
-          <h3 class="serif">We keep it flying.</h3>
-          <p>We keep your site online, secure and backed up — and make small changes free for the first year. After that it's a few quid a month.</p>
+          <h3 class="serif">Hosted and looked after.</h3>
+          <p>Your site sits on managed hosting with SSL, and we take care of the daily backups ourselves. We include a set allowance of small changes in the first year. After that it's a few quid a month.</p>
           <ul>
-            <li>Secure &amp; always online (SSL)</li>
-            <li>Backed up daily — never lose it</li>
-            <li>Free small changes for a year</li>
+            <li>SSL and managed hosting</li>
+            <li>Daily backups, managed by us</li>
+            <li>Up to 2 hours of small changes per quarter (first year)</li>
           </ul>
         </div>
         <div class="stage-art rv-right">
@@ -1285,13 +1260,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
         <span class="eyebrow rv" style="margin-bottom:18px;display:inline-flex;"><span class="dot"></span><span class="type-on">003 / What we build</span></span>
         <h2 class="rise" style="margin-top:18px;"><span>Pick the size <em>that fits.</em></span></h2>
       </div>
-      <p class="rv d2">Five options — from a one-page intro site up to a full online shop. Most small businesses pick <strong style="color:var(--violet-soft);">Brochure</strong>.</p>
-    </div>
-
-    <div class="offer-banner rv">
-      <span class="offer-pulse"></span>
-      <strong>Launch offer</strong>
-      <span>Book before the end of the month and get an extra month of free support on every build.</span>
+      <p class="rv d2">Five options — from a one-page intro site up to a full online shop. <strong style="color:var(--violet-soft);">Brochure</strong> suits most small businesses.</p>
     </div>
 
     <div class="ptable-wrap rv-scale">
@@ -1307,7 +1276,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
               <div class="tprice">2 weeks</div>
             </th>
             <th class="tier recommended">
-              <span class="badge">Most popular</span>
+              <span class="badge">Recommended</span>
               <div class="tname">Brochure</div>
               <div class="tprice">2–3 weeks</div>
             </th>
@@ -1354,7 +1323,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           <li>Mobile-first layout</li>
           <li>Contact form</li>
           <li>Hosted & secure — SSL (year 1)</li>
-          <li>Backed up daily</li>
+          <li>Daily backups, managed by us</li>
           <li>Free 30 days support</li>
         </ul>
         <a class="pickbtn" href="#launch">Pick Landing</a>
@@ -1362,7 +1331,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
 
       <!-- 2. Brochure Card (Recommended) -->
       <div class="pmobile-card recommended">
-        <span class="badge">Most popular</span>
+        <span class="badge">Recommended</span>
         <div class="pmobile-card-num">Tier 02</div>
         <h3 class="pmobile-card-name fraunces">Brochure</h3>
         <div class="pmobile-card-price">
@@ -1434,7 +1403,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     </div>
 
     <div class="build-foot rv">
-      <span>Every build is hosted, secure (SSL), mobile-ready and backed up daily.</span>
+      <span>Every build is mobile-ready, hosted on managed infrastructure with SSL, and backed up daily by us.</span>
       <span>Every job quoted in writing before we start</span>
     </div>
   </div>
@@ -1444,11 +1413,11 @@ body.tritanopia-mode .crew-photo .silhouette::before {
 <section class="work" id="work">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow rv"><span class="dot"></span><span class="type-on">004 / Sample work</span></span>
+      <span class="eyebrow rv"><span class="dot"></span><span class="type-on">004 / Sample builds</span></span>
       <span class="sec-rule"></span>
-      <h2 class="rise"><span>A few builds <em>we're proud of.</em></span></h2>
-      <p class="rv d2">Click through to see them live.</p>
-      <p class="rv d2 work-disclaimer">These are demonstration builds created to show our approach, not commissioned client projects.</p>
+      <h2 class="rise"><span>A few things <em>we've built.</em></span></h2>
+      <p class="rv d2">Our own builds, shown to demonstrate how we work. Client projects coming soon.</p>
+      <p class="rv d2 work-disclaimer">These are self-initiated builds, not commissioned client work.</p>
     </div>
 
     <div class="work-grid">
@@ -1465,31 +1434,11 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           </div>
         </div>
         <div class="work-text">
-          <div class="meta">CammBot · Our own product · 2026</div>
+          <div class="meta">CammBot · Our own product</div>
           <h3 class="serif">CammBot</h3>
-          <p class="what">Our own AI helper, built for tradespeople and small businesses. It writes quotes, drafts emails and handles invoices.</p>
-          <div class="result">Built and run by us</div><br />
+          <p class="what">The site we built for our own AI assistant project — an in-house tool aimed at tradespeople and small businesses.</p>
+          <div class="result">Our own project · built by us</div><br />
           <a class="visit" href="https://cammycodes.github.io/Camm/" target="_blank" rel="noreferrer">Visit live site →</a>
-        </div>
-      </article>
-
-      <article class="work-card rv-scale">
-        <div class="work-art">
-          <div class="browser">
-            <div class="bar"><i></i><i></i><i></i><div class="url"></div></div>
-            <div class="body">
-              <h4>Restoring <em>Vitality.</em></h4>
-              <a class="cta">Book a session →</a>
-              <div class="lines"><i></i><i></i><i></i></div>
-            </div>
-          </div>
-        </div>
-        <div class="work-text">
-          <div class="meta">House of Recovery · Demonstration build · Wellness</div>
-          <h3 class="serif">House of Recovery</h3>
-          <p class="what">A demonstration build for a premium recovery studio — designed to feel clinical, not spa-like. Long-form editorial layout, clean booking flow, prices visible up front.</p>
-          <div class="result">Demonstration build · not a client project</div><br />
-          <a class="visit" href="https://cammycodes.github.io/HouseOfRecovery/" target="_blank" rel="noreferrer">Visit live site →</a>
         </div>
       </article>
 
@@ -1505,7 +1454,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           </div>
         </div>
         <div class="work-text">
-          <div class="meta">cmd · Our own site · London</div>
+          <div class="meta">cmd · Our own site</div>
           <h3 class="serif">cmd itself.</h3>
           <p class="what">The site you're on. Built as our calling card — every animation, transition and detail is the same care we put into every build.</p>
           <div class="result">Our own site · built by us</div><br />
@@ -1568,9 +1517,21 @@ body.tritanopia-mode .crew-photo .silhouette::before {
           <li><a href="#launch">Get a quote</a></li>
         </ul>
       </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="terms.html">Terms &amp; conditions</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="hosting.html">Hosting &amp; support</a></li>
+        </ul>
+      </div>
     </div>
+    <!-- TRADER-ADDRESS: add the geographic trading address here once one is available. -->
     <div class="foot-bot">
-      <span>© 2026 cmd — Camm Design · London</span>
+      <div class="trader-id">
+        <span class="legal-name">cmd — Camm Design is a trading name of Ethan Camm, a sole trader in the United Kingdom.</span>
+        <span>© 2026 Ethan Camm</span>
+      </div>
       <a class="signature" href="#top">Designed by Camm</a>
     </div>
   </div>
@@ -1648,7 +1609,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     ['Pages', '1 page', '5–10 pages', '5–10 pages + booking', '10+ pages + shop', 'As needed'],
     ['Mobile-first design', true, true, true, true, true],
     ['We host it free (year 1)', true, true, true, true, true],
-    ['Secure (SSL) + daily backups', true, true, true, true, true],
+    ['SSL + daily backups (managed by us)', true, true, true, true, true],
     ['Contact form', true, true, true, true, true],
     ['Custom copywriting', false, true, true, true, true],
     ['Photo gallery', false, true, true, true, true],
@@ -1659,7 +1620,7 @@ body.tritanopia-mode .crew-photo .silhouette::before {
     ['Up to 50 products', false, false, false, true, true],
     ['Stock + email receipts', false, false, false, true, true],
     ['Custom integrations', false, false, false, false, true],
-    ['Ongoing support (launch offer)', 'Free 30 days', 'Free 60 days', 'Free 60 days', 'Free 90 days', 'Tailored']
+    ['Ongoing support', 'Free 30 days', 'Free 60 days', 'Free 60 days', 'Free 90 days', 'Tailored']
   ];
   const RECOMMENDED_COL = 1; // 0-indexed among tier columns => Brochure
   const tbody = document.getElementById('ptable-body');

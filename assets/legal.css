@@ -1,0 +1,169 @@
+/* cmd — Camm Design : shared stylesheet for the legal pages.
+   Deliberately plain. These pages exist to be read, not admired. */
+
+:root{
+  --ink-100:#000;
+  --ink-90:#0a0910;
+  --ink-70:#1c1a28;
+  --ink-60:#2a2738;
+  --ink-30:#7c7894;
+  --ink-20:#a8a4be;
+  --paper:#fff;
+  --violet:#9b7bff;
+  --violet-soft:#c8a8ff;
+  --r-sm:14px;
+  --r-full:999px;
+  --max:760px;
+}
+
+*{box-sizing:border-box;}
+
+html{-webkit-text-size-adjust:100%;}
+
+body{
+  margin:0;
+  background:var(--ink-100);
+  color:var(--ink-20);
+  font-family:"Geist","Helvetica Neue",Arial,sans-serif;
+  font-weight:300;
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px;}
+
+/* ── header ── */
+.legal-nav{
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:20px 0;
+  position:sticky;top:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(12px);
+  z-index:10;
+}
+.legal-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+/* Matches the wordmark in the nav on index.html exactly:
+   italic Fraunces, lowercase, with a blinking white cursor block. */
+.brand{
+  color:var(--paper);text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:"Fraunces",Georgia,serif;
+  font-size:20px;font-style:italic;font-weight:400;
+  font-variation-settings:"opsz" 24;
+  letter-spacing:-0.02em;
+  text-transform:lowercase;
+}
+.brand .cursor{
+  display:inline-block;width:8px;height:13px;
+  background:var(--paper);
+  transform:translateY(1px);
+  border-radius:1px;
+  animation:blink 1.2s steps(2) infinite;
+}
+@keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.legal-nav a.back{
+  color:var(--ink-30);text-decoration:none;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+}
+.legal-nav a.back:hover{color:var(--violet-soft);}
+
+/* ── document ── */
+main{padding:64px 0 96px;}
+
+.eyebrow{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--violet-soft);
+  display:block;margin-bottom:18px;
+}
+
+h1{
+  font-family:"Fraunces",Georgia,serif;
+  font-weight:400;font-variation-settings:"opsz" 96;
+  font-size:clamp(34px,6vw,52px);
+  line-height:1.05;letter-spacing:-.025em;
+  color:var(--paper);
+  margin:0 0 20px;
+}
+
+h2{
+  font-family:"Fraunces",Georgia,serif;
+  font-weight:400;font-variation-settings:"opsz" 48;
+  font-size:26px;line-height:1.2;letter-spacing:-.02em;
+  color:var(--paper);
+  margin:56px 0 14px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+h2:first-of-type{border-top:none;padding-top:0;}
+
+h3{
+  font-size:15px;color:var(--paper);font-weight:500;
+  margin:28px 0 8px;
+}
+
+p{margin:0 0 16px;}
+ul,ol{margin:0 0 16px;padding-left:22px;}
+li{margin-bottom:8px;}
+
+a{color:var(--violet-soft);text-decoration:underline;text-underline-offset:3px;}
+a:hover{color:var(--paper);}
+
+strong{color:var(--paper);font-weight:500;}
+
+.updated{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-30);
+  margin-bottom:48px;
+}
+
+/* Callout — used for the things a reader must not miss. */
+.note{
+  border-left:2px solid var(--violet-soft);
+  background:rgba(155,123,255,.07);
+  padding:18px 22px;
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  margin:0 0 24px;
+}
+.note p:last-child{margin-bottom:0;}
+.note.warn{border-left-color:#ffb84d;background:rgba(255,184,77,.07);}
+
+/* Trader identification block. */
+.trader{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r-sm);
+  padding:22px 24px;
+  margin:0 0 32px;
+  font-size:15px;
+}
+.trader dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 20px;}
+.trader dt{
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-30);padding-top:4px;
+}
+.trader dd{margin:0;color:var(--paper);}
+
+@media (max-width:520px){
+  .trader dl{grid-template-columns:1fr;gap:2px;}
+  .trader dd{margin-bottom:12px;}
+}
+
+/* ── footer ── */
+.legal-foot{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:32px 0 48px;
+  font-family:"Geist Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-30);
+}
+.legal-foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.legal-foot a{color:var(--ink-30);text-decoration:none;margin-right:18px;}
+.legal-foot a:hover{color:var(--violet-soft);}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+}
