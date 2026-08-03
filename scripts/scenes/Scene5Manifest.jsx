@@ -12,8 +12,8 @@ function Scene5Manifest() {
       name: 'Landing page',
       desc: 'One page that does the job. Phone-ready in two weeks.',
       includes: ['Copy', 'Design', 'Build', 'Host'],
-      price: '£800+',
-      cadence: 'From',
+      price: '2 weeks',
+      cadence: '',
       accent: '#C8A8FF'   // lilac
     },
     {
@@ -48,8 +48,8 @@ function Scene5Manifest() {
       name: 'Custom build',
       desc: 'Anything bigger. Portals, calculators, integrations.',
       includes: ['Scoped per project'],
-      price: 'POA',
-      cadence: 'Quote',
+      price: 'Scoped',
+      cadence: '',
       accent: '#6A48E0'   // deep galaxy
     }
   ];

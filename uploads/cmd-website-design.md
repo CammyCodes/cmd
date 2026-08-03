@@ -126,12 +126,12 @@ The home page is the journey. Eight scenes. Each one drives a different starfiel
   - Tier name (Fraunces, medium)
   - One-line description (Geist Sans)
   - Inclusions (small mono list)
-  - Price (Fraunces, right-aligned)
-- Tiers (matching `project.md` §5 starting-out pricing, Tier A column for v1 of the site):
-  - **Landing page** — One page that does the job. *From £500.*
-  - **Brochure site** — 5–10 pages, contact, gallery. *From £1,200.*
-  - **Brochure + bookings** — As above, plus a way for customers to book in. *From £1,500.*
-  - **Online shop** — Up to 50 products, secure checkout. *From £2,500.*
+  - Timeline (Fraunces, right-aligned) — no prices shown on the site
+- Tiers (matching `project.md` §5, Tier A column for v1 of the site):
+  - **Landing page** — One page that does the job. *Quoted per project.*
+  - **Brochure site** — 5–10 pages, contact, gallery. *Quoted per project.*
+  - **Brochure + bookings** — As above, plus a way for customers to book in. *Quoted per project.*
+  - **Online shop** — Up to 50 products, secure checkout. *Quoted per project.*
   - **Custom build** — Anything bigger. Portals, calculators, integrations. *Contact for quote.*
 - Below the table, in mono: `> All sites include hosting, SSL, daily backups, and updates. See approach for details.`
 
@@ -327,7 +327,7 @@ Observations from the reference, distilled into rules we follow.
 | Component animation | **Framer Motion** | Hover states, page transitions, micro-interactions. |
 | Forms (contact) | **react-hook-form** + **zod** | Lightweight, typed. POST to a Next.js API route that forwards to HubSpot via webhook. |
 | Hosting | **Vercel** | Free tier covers us. Edge functions for the contact form. |
-| Analytics | **Plausible** (~£5/mo) | Privacy-friendly, no cookie banner needed for it specifically. |
+| Analytics | **Plausible** (paid tier) | Privacy-friendly, no cookie banner needed for it specifically. |
 | Fonts | **Fraunces** (Google Fonts), **Geist Sans** and **Geist Mono** (self-hosted via `next/font`) | All free. Self-hosted = no CLS, no third-party request. |
 | Type-checking / linting | TypeScript strict, ESLint, Prettier | Baseline. |
 
