@@ -1,50 +1,55 @@
 # cmd — Camm Design
 
-Most websites are dead rocks. We build worlds.
+Website design for small businesses. London, UK.
 
-**cmd** is a premium, single-page portfolio website designed and developed for Camm Design, based in London. It serves as a showcase of interactive web development, clean typographic layouts, and immersive visual storytelling.
-
----
-
-## 🚀 Key Features
-
-- **Draggable 3D Terrestrial Planet**: A fully interactive Three.js-rendered basalt planet centered on the home hero section. Features customized PBR lighting, procedural height bump mapping, slow auto-rotation, and interactive touch/mouse drag controls (complete with mobile scroll-blocking).
-- **Responsive Flight Plan**: A step-by-step interactive journey section that flows seamlessly from *Brief* to *Liftoff* to *Orbit*, fully responsive with custom flexbox layout ordering on mobile viewports.
-- **Color-Coded Package Manifest**: Multi-tier vertical package cards on mobile and an interactive comparison table on desktop detailing different design and development options (Landing, Brochure, Bookings, Online shop, Custom). No prices are shown — every job is quoted individually.
-- **CSS macOS Browser Mockups**: Realistic CSS-only macOS-style browser mockups used for portfolio items, optimized to scale proportionally on small screens without overlapping headlines or CTA buttons.
-- **Dynamic Starfield**: A high-performance canvas 2D starfield that adjusts density, speed, and twinkling frequency based on scroll progress through each scene.
+This repository holds the source of [camm.design](https://camm.design), our own
+website, published as a static site.
 
 ---
 
-## 🛠️ Technology Stack
+## Services
 
-- **Graphics**: [Three.js](https://threejs.org/) (PBR Materials, Directional/Ambient Lighting, Sphere Geometry)
-- **Framework**: HTML5, Vanilla JavaScript, CSS3
-- **Fonts**: [Fraunces](https://fonts.google.com/specimen/Fraunces) (Serif), [Geist](https://vercel.com/font/sans) (Sans-Serif), [Geist Mono](https://vercel.com/font/mono) (Monospace)
-- **Deployment**: Highly optimized static asset loading, ready for GitHub Pages, Netlify, or Vercel.
+We are a website design studio. We design websites for small businesses —
+layout, typography, copy, imagery and search engine setup — and arrange hosting
+and ongoing support through a specialist managed hosting provider.
+
+Packages run from a single-page site up to an online shop, with a bespoke tier
+scoped per project. Every job is quoted in writing before work starts.
+
+- **Terms & Conditions** — [terms.html](terms.html)
+- **Privacy Policy** — [privacy.html](privacy.html)
+- **Hosting & Support Terms** — [hosting.html](hosting.html)
+
+We do not work with banks, financial services firms, or businesses carrying on a
+regulated financial activity. See section 2 of the Terms.
 
 ---
 
-## 📱 Mobile Responsiveness Polish
+## Contents
 
-The codebase has been specifically polished for small screens and mobile devices:
-1. **Interactive Overrides**: Dragging the Three.js planet on mobile triggers `e.preventDefault()`, allowing rotation without causing the parent page to scroll.
-2. **Stacking Order Corrected**: Flexbox ordering ensures elements stack consistently (**Marker -> Text -> Art**) even where components are reversed in source HTML for alternating desktop styling.
-3. **Flexible Package Layout**: Desktop comparison tables are hidden below `768px` in favor of a clean, vertically stacked card layout.
-4. **Mockup Scalability**: Viewport-specific media queries dynamically scale padding, headline sizes (`32px` to `20px`), and absolute positions within CSS browser mockups.
+| Path | What it is |
+| --- | --- |
+| `index.html` | The homepage |
+| `terms.html`, `privacy.html`, `hosting.html` | Legal pages |
+| `assets/` | Imagery and legal-page styling |
+| `CNAME` | Custom domain for GitHub Pages |
 
 ---
 
-## 💻 Local Preview
+## Local preview
 
-To run the site locally:
-1. Clone this repository.
-2. Serve the directory using any static file server, for example:
-   ```bash
-   # Using python
-   python -m http.server 8000
-   
-   # Using node (http-server)
-   npx http-server .
-   ```
-3. Open `http://localhost:8000/` (or `http://localhost:8000/index.html`) in your web browser.
+Serve the directory with any static file server:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000/`.
+
+---
+
+## Contact
+
+hello@camm.design · +44 7404 922 567 · London, UK
+
+cmd — Camm Design is a trading name of Ethan Camm, a sole trader.
